@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ReviewRequest, ReviewResponse } from '../models/review.model';
+import {environment} from "../../../../environments/environment";
 
 interface ApiResponse<T> {
     success: boolean;
@@ -15,7 +16,7 @@ interface ApiResponse<T> {
 @Injectable({ providedIn: 'root' })
 export class ReviewService {
 
-    private readonly API = 'http://localhost:8081/api/reviews';
+    private readonly API = `${environment.apiUrl}/api/reviews`;
 
     constructor(private http: HttpClient) {}
 

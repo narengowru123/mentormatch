@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { NotificationItem } from '../../student/models/notification.model';
+import {environment} from "../../../../environments/environment";
 
 interface ApiResponse<T> {
     message: string;
@@ -13,7 +14,7 @@ interface ApiResponse<T> {
     providedIn: 'root'
 })
 export class NotificationService {
-    private readonly apiUrl = 'http://localhost:8081/api/notifications';
+    private readonly apiUrl = `${environment.apiUrl}/api/notifications`;
 
     constructor(private http: HttpClient) {}
 

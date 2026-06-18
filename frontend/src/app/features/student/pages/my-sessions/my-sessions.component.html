@@ -27,14 +27,10 @@
         </div>
 
         <div *ngIf="filteredSessions.length === 0" class="empty-state">
-            <p class="empty-icon">--</p>
+            <p class="empty-icon">📭</p>
             <p class="empty-title">No {{ activeTab === 'ALL' ? '' : activeTab.toLowerCase() }} sessions yet</p>
-            <p class="empty-sub" *ngIf="activeTab === 'ALL'">
-                Book a session with a mentor to get started.
-            </p>
-            <button class="btn-primary" *ngIf="activeTab === 'ALL'" (click)="browseMentors()">
-                Browse mentors
-            </button>
+            <p class="empty-sub" *ngIf="activeTab === 'ALL'">Book a session with a mentor to get started.</p>
+            <button class="btn-primary" *ngIf="activeTab === 'ALL'" (click)="browseMentors()">Browse mentors</button>
         </div>
 
         <div class="session-list">

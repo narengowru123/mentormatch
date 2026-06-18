@@ -6,11 +6,12 @@ import { StudentProfileComponent } from './pages/profile/student-profile.compone
 import { BrowseMentorsComponent } from './pages/browse-mentors/browse-mentors.component';
 import { MentorDetailComponent } from './pages/mentor-detail/mentor-detail.component';
 import { MySessionsComponent } from './pages/my-sessions/my-sessions.component';
-
+import { SubmitReviewComponent } from './pages/submit-review/submit-review.component';
 // Added by Gnaneshwar
 import { NotificationsComponent } from './pages/notifications/notifications.component';
 
 const routes: Routes = [
+  { path: 'submit-review/:id', component: SubmitReviewComponent },
   { path: 'notifications', component: NotificationsComponent },
   {
     path: '',

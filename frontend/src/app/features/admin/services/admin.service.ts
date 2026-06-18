@@ -8,12 +8,13 @@ import { AdminUser, AdminUserDetail } from '../models/admin-user.model';
 import { AdminSession } from '../models/admin-session.model';
 import { AdminReview } from '../models/admin-review.model';
 import { BroadcastRequest } from '../models/broadcast-request.model';
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
-  private apiUrl = 'http://localhost:8081/api/admin';
+  private apiUrl = `${environment.apiUrl}/api/admin`;
 
   constructor(private http: HttpClient) {}
 

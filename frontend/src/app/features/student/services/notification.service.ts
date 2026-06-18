@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import { NotificationItem } from '../models/notification.model';
+import {environment} from "../../../../environments/environment";
 
 interface ApiResponse<T> {
     success: boolean;
@@ -17,7 +18,7 @@ interface ApiResponse<T> {
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
 
-    private readonly API = 'http://localhost:8081/api/notifications';
+    private readonly API = `${environment.apiUrl}/api/notifications`;
     private stompClient: Client | null = null;
 
     // Live streams — components subscribe to these
@@ -32,7 +33,7 @@ export class NotificationService {
     // Call after login
     connect(userId: number, token: string): void {
         this.stompClient = new Client({
-            webSocketFactory: () => new SockJS('http://localhost:8081/ws'),
+            webSocketFactory: () => new SockJS(`${environment.apiUrl}/api/ws`),
             connectHeaders: { Authorization: `Bearer ${token}` },
             reconnectDelay: 5000,
             onConnect: () => {

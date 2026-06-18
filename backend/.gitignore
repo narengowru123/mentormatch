@@ -2,3 +2,4 @@
 target/
 uploads/
 .junie/
+src/main/resources/application-local.properties

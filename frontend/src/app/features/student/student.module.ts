@@ -27,6 +27,7 @@ import { StudentNavbarComponent } from './components/student-navbar/student-navb
     NotificationsComponent,
     NotificationBellComponent,
     StudentNavbarComponent
+
   ],
   imports: [
     CommonModule,

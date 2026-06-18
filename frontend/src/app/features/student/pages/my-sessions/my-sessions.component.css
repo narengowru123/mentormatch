@@ -4,40 +4,22 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #111827;
 }
-.btn-book:hover { background: #1d4ed8; }
-.back-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 13px;
-    color: #2563eb;
-    padding: 0;
-    margin-bottom: 20px;
-    display: block;
-}
-.back-btn:hover { text-decoration: underline; }
-
 .page-header {
     display: flex; justify-content: space-between;
     align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;
 }
 .page-header h1 { font-size: 22px; font-weight: 600; margin: 0 0 4px; }
 .sub { font-size: 13px; color: #6b7280; margin: 0; }
-
 .btn-primary {
     padding: 9px 18px; border-radius: 8px; border: none;
-    background: #2563eb; color: #fff;
-    font-size: 14px; font-weight: 500; cursor: pointer;
+    background: #2563eb; color: #fff; font-size: 14px; font-weight: 500; cursor: pointer;
 }
 .btn-primary:hover { background: #1d4ed8; }
-
 .state-msg { text-align: center; padding: 60px 0; color: #9ca3af; font-size: 14px; }
 .banner.error {
     background: #fef2f2; color: #991b1b; border: 1px solid #fecaca;
     border-radius: 8px; padding: 10px 14px; font-size: 13px; margin-bottom: 16px;
 }
-
-/* Tabs */
 .tabs {
     display: flex; gap: 4px; flex-wrap: wrap;
     border-bottom: 1px solid #e5e7eb; margin-bottom: 20px;
@@ -53,153 +35,97 @@
 .tab-btn.active { color: #2563eb; border-bottom-color: #2563eb; font-weight: 500; }
 .tab-count {
     background: #e5e7eb; color: #374151;
-    font-size: 10px; font-weight: 600;
-    padding: 1px 6px; border-radius: 10px;
+    font-size: 10px; font-weight: 600; padding: 1px 6px; border-radius: 10px;
 }
 .tab-btn.active .tab-count { background: #dbeafe; color: #1d4ed8; }
-
-/* Empty state */
 .empty-state { text-align: center; padding: 60px 20px; }
 .empty-icon { font-size: 40px; margin-bottom: 12px; }
 .empty-title { font-size: 16px; font-weight: 500; margin: 0 0 6px; }
 .empty-sub { font-size: 13px; color: #6b7280; margin: 0 0 20px; }
-
-/* Session list */
 .session-list { display: flex; flex-direction: column; gap: 12px; }
-
 .session-card {
     display: flex; align-items: flex-start; gap: 14px;
     background: #fff; border: 1px solid #e5e7eb;
     border-radius: 12px; padding: 16px 18px;
     transition: box-shadow .15s, border-color .15s;
 }
-.session-card:hover {
-    border-color: #93c5fd;
-    box-shadow: 0 2px 10px rgba(37,99,235,.07);
-}
-
-/* Mentor avatar — fixed circle */
+.session-card:hover { border-color: #93c5fd; box-shadow: 0 2px 10px rgba(37,99,235,.07); }
 .mentor-avatar {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
+    width: 46px; height: 46px; border-radius: 50%;
     background: linear-gradient(135deg, #ede9fe, #ddd6fe);
-    color: #5b21b6;
-    font-size: 16px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    min-width: 46px;
+    color: #5b21b6; font-size: 16px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; min-width: 46px;
 }
-
-/* Session info */
 .session-info { flex: 1; min-width: 0; }
-
 .session-top {
     display: flex; align-items: center;
-    justify-content: space-between; gap: 10px; margin-bottom: 4px;
-    flex-wrap: wrap;
+    justify-content: space-between; gap: 10px; margin-bottom: 4px; flex-wrap: wrap;
 }
-.session-top h3 {
-    font-size: 15px; font-weight: 600; margin: 0; color: #111827;
-}
+.session-top h3 { font-size: 15px; font-weight: 600; margin: 0; color: #111827; }
 .mentor-name { font-size: 13px; color: #4b5563; margin: 0 0 6px; }
-
-.session-meta {
-    display: flex; align-items: center; gap: 6px;
-    flex-wrap: wrap; margin-bottom: 4px;
-}
+.session-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 4px; }
 .meta-item { font-size: 12px; color: #6b7280; }
-.meta-dot  { font-size: 12px; color: #d1d5db; }
-
-/* Scheduled time */
-.session-schedule {
-    font-size: 12px;
-    color: #374151;
-    margin-top: 6px;
-    font-weight: 500;
-}
-
-/* Meeting link box */
+.meta-dot { font-size: 12px; color: #d1d5db; }
+.session-schedule { font-size: 12px; color: #374151; margin-top: 6px; font-weight: 500; }
 .meeting-link-box {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 8px;
-    padding: 8px 12px;
-    background: #f0fdf4;
-    border: 1px solid #bbf7d0;
-    border-radius: 8px;
-    font-size: 13px;
-    color: #166534;
-    flex-wrap: wrap;
+    display: flex; align-items: center; gap: 8px; margin-top: 8px;
+    padding: 8px 12px; background: #f0fdf4; border: 1px solid #bbf7d0;
+    border-radius: 8px; font-size: 13px; color: #166534; flex-wrap: wrap;
 }
-
 .join-btn {
-    padding: 5px 14px;
-    background: #22c55e;
-    color: #fff;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 600;
+    padding: 5px 14px; background: #22c55e; color: #fff;
+    border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: 600;
     transition: background 0.15s;
-    white-space: nowrap;
 }
 .join-btn:hover { background: #16a34a; }
-
-/* Status messages */
 .pending-msg {
-    font-size: 12px;
-    color: #92400e;
-    background: #fef3c7;
-    padding: 6px 10px;
-    border-radius: 6px;
-    margin-top: 6px;
-    display: inline-block;
+    font-size: 12px; color: #92400e; background: #fef3c7;
+    padding: 6px 10px; border-radius: 6px; margin-top: 6px; display: inline-block;
 }
-
+.completed-actions {
+    display: flex; align-items: center; gap: 10px; margin-top: 8px; flex-wrap: wrap;
+}
 .completed-note {
-    font-size: 12px;
-    color: #1e40af;
-    background: #dbeafe;
-    padding: 6px 10px;
-    border-radius: 6px;
-    margin-top: 6px;
-    display: inline-block;
+    font-size: 12px; color: #1e40af; background: #dbeafe;
+    padding: 6px 10px; border-radius: 6px; display: inline-block;
 }
-
+.review-btn {
+    padding: 6px 16px; border-radius: 8px;
+    border: 1px solid #f59e0b; background: #fef3c7;
+    color: #92400e; font-size: 13px; font-weight: 500;
+    cursor: pointer; transition: all 0.15s;
+}
+.review-btn:hover { background: #fde68a; border-color: #d97706; }
 .rejection-note {
     margin-top: 6px; font-size: 12px; color: #991b1b;
-    background: #fef2f2; border-radius: 6px;
-    padding: 5px 10px; display: inline-block;
+    background: #fef2f2; border-radius: 6px; padding: 5px 10px; display: inline-block;
 }
 .rej-label { font-weight: 500; }
-
-/* Status badges */
 .status-badge {
-    font-size: 11px; font-weight: 600;
-    padding: 4px 12px; border-radius: 20px;
-    white-space: nowrap; flex-shrink: 0;
+    font-size: 11px; font-weight: 600; padding: 4px 12px;
+    border-radius: 20px; white-space: nowrap; flex-shrink: 0;
 }
 .status-accepted  { background: #d1fae5; color: #065f46; }
 .status-pending   { background: #fef3c7; color: #92400e; }
 .status-completed { background: #dbeafe; color: #1e40af; }
 .status-rejected  { background: #fee2e2; color: #991b1b; }
 .status-cancelled { background: #f3f4f6; color: #4b5563; }
-
-/* Arrow */
-.card-arrow {
-    font-size: 18px; color: #d1d5db;
-    flex-shrink: 0; margin-left: 4px;
-    align-self: center;
+.card-right {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 8px; flex-shrink: 0;
 }
+.cancel-btn {
+    padding: 5px 12px; border-radius: 6px;
+    border: 1px solid #fecaca; background: #fef2f2;
+    color: #dc2626; font-size: 12px; font-weight: 500; cursor: pointer;
+    transition: all 0.15s; white-space: nowrap;
+}
+.cancel-btn:hover { background: #fee2e2; }
+.card-arrow { font-size: 18px; color: #d1d5db; }
 .session-card:hover .card-arrow { color: #2563eb; }
-
 @media (max-width: 600px) {
     .session-top { flex-direction: column; align-items: flex-start; }
     .page-header { flex-direction: column; align-items: flex-start; }
-    .meeting-link-box { flex-direction: column; align-items: flex-start; }
+    .completed-actions { flex-direction: column; align-items: flex-start; }
 }

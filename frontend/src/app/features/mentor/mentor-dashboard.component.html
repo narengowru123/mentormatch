@@ -6,9 +6,7 @@
 
         <div class="dash-header">
             <div class="header-left">
-                <div class="avatar-wrap">
-                    <span>{{ initials }}</span>
-                </div>
+                <div class="avatar-wrap"><span>{{ initials }}</span></div>
                 <div>
                     <h1>{{ displayName }}</h1>
                     <p class="sub">{{ profile?.industry || 'Set up your mentor profile' }}</p>
@@ -40,17 +38,25 @@
             </div>
         </div>
 
+        <!-- Tabs -->
         <div class="nav-tabs">
-            <button class="tab-link" [class.active]="activeTab === 'profile'" (click)="switchTab('profile')">Edit Profile</button>
+            <button class="tab-link" [class.active]="activeTab === 'profile'" (click)="switchTab('profile')">
+                Edit Profile
+            </button>
             <button class="tab-link" [class.active]="activeTab === 'sessions'" (click)="switchTab('sessions')">
                 Session Requests
-                <span class="badge" *ngIf="sessionsList.length > 0">{{ sessionsList.length }}</span>
+                <span class="badge" *ngIf="pendingCount > 0">{{ pendingCount }}</span>
+            </button>
+            <button class="tab-link" [class.active]="activeTab === 'reviews'" (click)="switchTab('reviews')">
+                My Reviews
+                <span class="badge" *ngIf="reviewsList.length > 0">{{ reviewsList.length }}</span>
             </button>
         </div>
 
         <div class="banner success" *ngIf="saveSuccess">Profile saved successfully.</div>
         <div class="banner error" *ngIf="errorMsg">{{ errorMsg }}</div>
 
+        <!-- Profile tab -->
         <div class="main-grid" *ngIf="activeTab === 'profile'">
             <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="card edit-card">
                 <div class="card-head">
@@ -59,7 +65,6 @@
                         {{ saving ? 'Saving...' : 'Save profile' }}
                     </button>
                 </div>
-
                 <div class="field">
                     <label for="industry">Industry <span class="req">*</span></label>
                     <input id="industry" type="text" formControlName="industry" placeholder="Software / IT" />
@@ -67,7 +72,6 @@
                         Required, max 100 characters
                     </span>
                 </div>
-
                 <div class="field">
                     <label for="hourlyRate">Hourly rate in rupees</label>
                     <input id="hourlyRate" type="number" min="0" max="100000" formControlName="hourlyRate" placeholder="e.g. 500" />
@@ -75,7 +79,6 @@
                         Enter a value between 0 and 100000
                     </span>
                 </div>
-
                 <div class="field">
                     <label for="bio">Bio <span class="req">*</span></label>
                     <textarea id="bio" rows="6" formControlName="bio" placeholder="Tell students what you can help with."></textarea>
@@ -84,7 +87,6 @@
                         <span class="char" [class.over]="bioLength > 1000">{{ bioLength }} / 1000</span>
                     </div>
                 </div>
-
                 <div class="skills-block">
                     <label>Skills</label>
                     <div class="tags-box" (click)="skillEl.focus()">
@@ -104,15 +106,11 @@
                     <p class="hint">Press Enter or comma to add a skill.</p>
                 </div>
             </form>
-
             <div class="side-col">
                 <div class="card photo-card">
                     <p class="card-label">Profile avatar</p>
-                    <div class="photo-preview">
-                        <span>{{ initials }}</span>
-                    </div>
+                    <div class="photo-preview"><span>{{ initials }}</span></div>
                 </div>
-
                 <div class="card account-card">
                     <p class="card-label">Account</p>
                     <p class="profile-name">{{ displayName }}</p>
@@ -121,16 +119,14 @@
             </div>
         </div>
 
+        <!-- Sessions tab -->
         <div class="sessions-workspace" *ngIf="activeTab === 'sessions'">
-            <div *ngIf="sessionsLoading" class="state-msg">Fetching sessions...</div>
-
+            <div *ngIf="sessionsLoading" class="state-msg">Loading sessions...</div>
             <div *ngIf="!sessionsLoading && sessionsList.length === 0" class="empty-sessions">
-                <p>No student requests found in your queue.</p>
+                <p>No session requests yet.</p>
             </div>
-
             <div class="session-cards-container" *ngIf="!sessionsLoading && sessionsList.length > 0">
                 <div class="session-card-item card" *ngFor="let session of sessionsList">
-
                     <div class="session-card-header">
                         <div>
                             <span class="badge-plan"
@@ -141,7 +137,6 @@
                             <h3>Topic: {{ session.topic }}</h3>
                             <p class="student-info">Requested By: <strong>{{ session.studentName }}</strong> ({{ session.studentEmail }})</p>
                         </div>
-
                         <div class="action-status-block">
                             <div class="btn-group" *ngIf="session.status === 'PENDING'">
                                 <button type="button" class="btn-action accept"
@@ -151,7 +146,6 @@
                                         [disabled]="sessionActionRunning"
                                         (click)="openRejectionModal(session.id)">Reject</button>
                             </div>
-
                             <span class="status-indicator-badge"
                                   *ngIf="session.status !='PENDING'"
                                   [attr.data-status]="session.status">
@@ -201,9 +195,54 @@
                     <div class="rejection-note" *ngIf="session.status === 'REJECTED' && session.rejectionReason" style="margin-top: 12px; background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 10px; border-radius: 6px; font-size: 13px;">
                         <strong>Log Reason provided to student:</strong> {{ session.rejectionReason }}
                     </div>
-
+                    <div class="completed-note" *ngIf="session.status === 'COMPLETED'">
+                        ✅ Session completed. Student has been prompted to leave a review.
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Reviews tab -->
+        <div class="reviews-workspace" *ngIf="activeTab === 'reviews'">
+            <div *ngIf="reviewsLoading" class="state-msg">Loading reviews...</div>
+
+            <div *ngIf="!reviewsLoading && reviewsList.length === 0" class="empty-sessions">
+                <p>No reviews yet. Complete sessions to receive reviews from students.</p>
+            </div>
+
+            <ng-container *ngIf="!reviewsLoading && reviewsList.length > 0">
+
+                <!-- Average rating summary -->
+                <div class="rating-summary">
+                    <div class="avg-score">{{ getAvgRating() }}</div>
+                    <div>
+                        <div class="avg-stars">
+                            <span *ngFor="let s of [1,2,3,4,5]" class="mini-star" [class.filled]="s <= getAvgRatingNum()">★</span>
+                        </div>
+                        <div class="avg-label">Average · {{ reviewsList.length }} review{{ reviewsList.length > 1 ? 's' : '' }}</div>
+                    </div>
+                </div>
+
+                <!-- Review cards -->
+                <div class="reviews-list">
+                    <div class="review-card card" *ngFor="let review of reviewsList">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">{{ getReviewInitials(review.reviewerName) }}</div>
+                            <div class="reviewer-info">
+                                <p class="reviewer-name">{{ review.reviewerName }}</p>
+                                <p class="review-date">{{ formatReviewDate(review.createdAt) }}</p>
+                            </div>
+                            <div class="review-stars-right">
+                                <span class="stars-text">{{ getStars(review.rating) }}</span>
+                                <span class="rating-num">{{ review.rating }}/5</span>
+                            </div>
+                        </div>
+                        <p class="review-comment" *ngIf="review.comment">{{ review.comment }}</p>
+                        <p class="review-comment muted" *ngIf="!review.comment">No comment provided.</p>
+                    </div>
+                </div>
+
+            </ng-container>
         </div>
 
     </ng-container>
@@ -211,22 +250,19 @@
 
 <div class="modal-overlay" *ngIf="showAcceptModal">
     <div class="modal-container card">
-        <h3>Configure Session Meeting Space</h3>
-        <p>Provide your Google Meet, Zoom, or Teams URL to confirm scheduling:</p>
-
+        <h3>Add meeting link</h3>
+        <p>Provide your Google Meet, Zoom, or Teams URL:</p>
         <div class="field">
             <input type="url" [(ngModel)]="inputMeetingLink"
-                   placeholder="https://meet.google.com/abc-defg-hij"
-                   class="modal-input" />
+                   placeholder="https://meet.google.com/abc-defg-hij" class="modal-input" />
         </div>
-
         <div class="confirm-row">
             <button type="button" class="btn-primary"
                     [disabled]="!inputMeetingLink.trim() || sessionActionRunning"
                     (click)="confirmAcceptance()">
-                {{ sessionActionRunning ? 'Saving...' : 'Confirm & Generate Emails' }}
+                {{ sessionActionRunning ? 'Saving...' : 'Confirm & Notify Student' }}
             </button>
-            <button type="button" class="btn-secondary" (click)="closeAcceptWindow()">Dismiss</button>
+            <button type="button" class="btn-secondary" (click)="closeAcceptWindow()">Cancel</button>
         </div>
     </div>
 </div>

@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MentorProfile, MentorProfileRequest } from '../models/mentor-profile.model';
+import {environment} from "../../../../environments/environment";
 
 interface ApiResponse<T> {
   success: boolean;
@@ -13,7 +14,7 @@ interface ApiResponse<T> {
 @Injectable({ providedIn: 'root' })
 export class MentorProfileService {
 
-  private readonly API = 'http://localhost:8081/api/mentors';
+  private readonly API = `${environment.apiUrl}/api/mentors`;
 
   constructor(private http: HttpClient) {}
 

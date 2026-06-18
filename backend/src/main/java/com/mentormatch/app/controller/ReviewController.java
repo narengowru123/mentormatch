@@ -7,6 +7,7 @@ import com.mentormatch.app.service.ReviewService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class ReviewController {
     }
 
     // POST /api/reviews/sessions/{sessionId}
-    // Student OR mentor submits a review after session is COMPLETED
+    // Student submits a review after session is COMPLETED
     @PostMapping("/sessions/{sessionId}")
     public ResponseEntity<ApiResponse<ReviewResponse>> submitReview(
             @PathVariable Long sessionId,
@@ -37,7 +38,20 @@ public class ReviewController {
                 .body(ApiResponse.success("Review submitted successfully.", review));
     }
 
-    // GET /api/reviews/mentors/{mentorId} — public
+    // GET /api/reviews/mentor/me — Fetch reviews for the logged-in mentor from their dashboard tab
+    @GetMapping("/mentor/me")
+    @PreAuthorize("hasAuthority('ROLE_MENTOR')")
+    public ResponseEntity<ApiResponse<List<ReviewResponse>>> getMyDashboardReviews(Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(ApiResponse.error("Please login first."));
+        }
+        String email = authentication.getName();
+        List<ReviewResponse> reviews = reviewService.getMyReviews(email);
+        return ResponseEntity.ok(ApiResponse.success("Your reviews fetched successfully.", reviews));
+    }
+
+    // GET /api/reviews/mentors/{mentorId} — public profile view (converts profile ID safely to user ID)
     @GetMapping("/mentors/{mentorId}")
     public ResponseEntity<ApiResponse<List<ReviewResponse>>> getMentorReviews(
             @PathVariable Long mentorId) {

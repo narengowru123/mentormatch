@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { StudentProfile, UpdateStudentRequest } from '../models/student-profile.model';
+import {environment} from "../../../../environments/environment";
 
 interface ApiResponse<T> {
   success: boolean;
@@ -13,7 +14,7 @@ interface ApiResponse<T> {
 @Injectable({ providedIn: 'root' })
 export class StudentService {
 
-  private readonly API = 'http://localhost:8081/api/students';
+  private readonly API = `${environment.apiUrl}/api/students`;
 
   constructor(private http: HttpClient) {}
 

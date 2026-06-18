@@ -4,13 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionService, SessionResponse } from '../../services/session.service';
 
-type TabStatus = 'ALL' | 'PENDING' | 'ACCEPTED' | 'COMPLETED' | 'REJECTED' | 'CANCELLED';
-
-interface Tab {
-  label: string;
-  value: TabStatus;
-  count: number;
-}
+interface Tab { label: string; value: string; count: number; }
 
 @Component({
   selector: 'app-my-sessions',
@@ -19,11 +13,11 @@ interface Tab {
 })
 export class MySessionsComponent implements OnInit {
 
-  allSessions: SessionResponse[]      = [];
+  allSessions: SessionResponse[] = [];
   filteredSessions: SessionResponse[] = [];
-  activeTab: TabStatus                = 'ALL';
-  loading  = true;
+  loading = true;
   errorMsg = '';
+  activeTab = 'ALL';
 
   tabs: Tab[] = [
     { label: 'All',       value: 'ALL',       count: 0 },
@@ -40,6 +34,11 @@ export class MySessionsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loadSessions();
+  }
+
+  loadSessions(): void {
+    this.loading = true;
     this.sessionService.getMySessions().subscribe({
       next: (sessions) => {
         this.allSessions = sessions || [];
@@ -54,24 +53,34 @@ export class MySessionsComponent implements OnInit {
     });
   }
 
-  updateTabCounts(): void {
-    this.tabs = this.tabs.map(tab => ({
-      ...tab,
-      count: tab.value === 'ALL'
-          ? this.allSessions.length
-          : this.allSessions.filter(s => s.status === tab.value).length
-    }));
+  updateCounts(): void {
+    this.tabs[0].count = this.allSessions.length;
+    this.tabs[1].count = this.allSessions.filter(s => s.status === 'PENDING').length;
+    this.tabs[2].count = this.allSessions.filter(s => s.status === 'ACCEPTED').length;
+    this.tabs[3].count = this.allSessions.filter(s => s.status === 'COMPLETED').length;
+    this.tabs[4].count = this.allSessions.filter(s => s.status === 'REJECTED').length;
+    this.tabs[5].count = this.allSessions.filter(s => s.status === 'CANCELLED').length;
   }
 
-  applyTab(tab: TabStatus): void {
-    this.activeTab = tab;
-    this.filteredSessions = tab === 'ALL'
+  applyTab(value: string): void {
+    this.activeTab = value;
+    this.filteredSessions = value === 'ALL'
         ? this.allSessions
-        : this.allSessions.filter(s => s.status === tab);
+        : this.allSessions.filter(s => s.status === value);
   }
 
-  viewSession(id: number): void {
-    this.router.navigate(['/student/sessions', id]);
+  // Cancel a PENDING or ACCEPTED session
+  cancelSession(id: number): void {
+    if (!confirm('Are you sure you want to cancel this session?')) return;
+    this.sessionService.cancelSession(id).subscribe({
+      next: () => { this.loadSessions(); },
+      error: () => { alert('Failed to cancel session. Please try again.'); }
+    });
+  }
+
+  // Navigate to review page — only shown for COMPLETED sessions
+  goToReview(sessionId: number): void {
+    this.router.navigate(['/student/submit-review', sessionId]);
   }
 
   browseMentors(): void {
@@ -79,15 +88,8 @@ export class MySessionsComponent implements OnInit {
   }
 
   getInitials(name: string): string {
-    return (name ?? 'M').split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
-  }
-
-  formatDate(dateStr: string): string {
-    if (!dateStr) return '';
-    return new Date(dateStr).toLocaleDateString('en-IN', {
-      day: 'numeric', month: 'short', year: 'numeric',
-      hour: '2-digit', minute: '2-digit'
-    });
+    if (!name) return 'M';
+    return name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
   }
 
   getStatusClass(status: string): string {
@@ -101,13 +103,19 @@ export class MySessionsComponent implements OnInit {
     return map[status] ?? '';
   }
 
-  getPlanIcon(plan: string): string {
-    const map: Record<string, string> = {
-      SINGLE: '1️⃣', WEEKLY: '📅', MONTHLY: '🗓️'
+  getPlanIcon(planType: string): string {
+    const icons: Record<string, string> = {
+      SINGLE: '1️⃣', WEEKLY: '📅', MONTHLY: '🗓️', DAILY: '☀️'
     };
-    return map[plan] ?? '📅';
+    return icons[planType] ?? '📌';
   }
 
+  formatDate(dateStr: string): string {
+    if (!dateStr) return '';
+    return new Date(dateStr).toLocaleString('en-IN', {
+      day: 'numeric', month: 'short', year: 'numeric',
+      hour: '2-digit', minute: '2-digit'
+    });
   goback(): void {
     this.router.navigate(['/student/dashboard']);
   }
