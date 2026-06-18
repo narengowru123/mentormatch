@@ -41,9 +41,9 @@ export class MySessionsComponent implements OnInit {
     this.loading = true;
     this.sessionService.getMySessions().subscribe({
       next: (sessions) => {
-        this.allSessions = sessions;
-        this.updateCounts();
-        this.applyTab(this.activeTab);
+        this.allSessions = sessions || [];
+        this.updateTabCounts();
+        this.applyTab('ALL');
         this.loading = false;
       },
       error: () => {
@@ -110,11 +110,7 @@ export class MySessionsComponent implements OnInit {
     return icons[planType] ?? '📌';
   }
 
-  formatDate(dateStr: string): string {
-    if (!dateStr) return '';
-    return new Date(dateStr).toLocaleString('en-IN', {
-      day: 'numeric', month: 'short', year: 'numeric',
-      hour: '2-digit', minute: '2-digit'
-    });
+  goback(): void {
+    this.router.navigate(['/student/dashboard']);
   }
 }

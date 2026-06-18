@@ -22,6 +22,15 @@ export interface SessionRequest {
     durationMinutes: number;  // 60 or 120
 }
 
+// NEW: Child structural alignment model node matching the backend layout
+export interface OccurrenceSummary {
+    id: number;
+    scheduledAt: string;
+    durationMinutes: number;
+    meetingLink: string | null;
+    status: 'PENDING' | 'ACCEPTED' | 'REJECTED' | 'CANCELLED' | 'COMPLETED';
+}
+
 export interface SessionResponse {
     id: number;
     topic: string;
@@ -37,6 +46,10 @@ export interface SessionResponse {
     mentorName: string;
     studentId: number;
     studentName: string;
+    
+    // 🔽 ADDED NEW MAPPING FIELDS FOR THE STUDENT DATA STREAM
+    rejectionReason?: string | null;
+    occurrences?: OccurrenceSummary[];
 }
 
 @Injectable({ providedIn: 'root' })
