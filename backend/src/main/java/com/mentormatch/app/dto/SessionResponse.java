@@ -14,6 +14,8 @@ public class SessionResponse {
     private LocalDateTime scheduledAt;
     private Integer durationMinutes;
     private String meetingLink;
+    private String rejectionReason;
+    private java.util.List<OccurrenceResponse> occurrences;
 
     // Mentor info
     private Long mentorId;
@@ -67,5 +69,11 @@ public class SessionResponse {
 
     public String getStudentName() { return studentName; }
     public void setStudentName(String studentName) { this.studentName = studentName; }
+
+    public String getRejectionReason() { return rejectionReason; }
+    public void setRejectionReason(String rejectionReason) { this.rejectionReason = rejectionReason; }
+
+    public java.util.List<OccurrenceResponse> getOccurrences() { return occurrences; }
+    public void setOccurrences(java.util.List<OccurrenceResponse> occurrences) { this.occurrences = occurrences; }
 }
 

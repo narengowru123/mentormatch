@@ -22,8 +22,9 @@ export class SessionManagementService {
     return this.http.patch(`${this.apiUrl}/${sessionId}/accept`, { meetingLink });
   }
 
-  rejectSession(sessionId: number): Observable<any> {
-    return this.http.patch(`${this.apiUrl}/${sessionId}/reject`, {});
+  // UPDATED: Now accepts two parameters and delivers the text reason inside the request body payload object
+  rejectSession(sessionId: number, reasonText: string): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/${sessionId}/reject`, { reason: reasonText });
   }
 
   // Mark session as COMPLETED — only mentor can do this

@@ -10,7 +10,7 @@ export interface OccurrenceSummary {
 
 export interface SessionResponse {
   id: number;
-  sessionId: number;
+  sessionId: number; // Retained to ensure button click bindings stay compatible
   studentName: string;
   studentEmail: string;
   topic: string;
@@ -24,4 +24,7 @@ export interface SessionResponse {
   durationMinutes: number | null;
   meetingLink: string | null;
   occurrences: OccurrenceSummary[];
+  
+  // 🔽 ADDED: Allows the HTML template to read logged rejections cleanly
+  rejectionReason?: string | null; 
 }
