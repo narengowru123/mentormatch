@@ -1,6 +1,8 @@
 <app-student-navbar></app-student-navbar>
+
 <div class="page">
-    <button class="back-btn" type="button" (click)="goback()" >← Back to dashboard</button>
+    <button class="back-btn" type="button" (click)="goback()">← Back to dashboard</button>
+    
     <div class="page-header">
         <div>
             <h1>My Sessions</h1>
@@ -36,71 +38,122 @@
         </div>
 
         <div class="session-list">
-            <div class="session-card"
-                 *ngFor="let session of filteredSessions">
+            <div class="session-card" 
+                 *ngFor="let session of filteredSessions" 
+                 style="display: flex; flex-direction: column; align-items: stretch; gap: 12px; padding: 20px; margin-bottom: 16px; background: #ffffff; border-radius: 12px; border: 1px solid #e5e7eb; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                
+                <div style="display: flex; align-items: flex-start; gap: 16px; width: 100%;">
+                    <div class="mentor-avatar" style="flex-shrink: 0;">
+                        <span>{{ getInitials(session.mentorName) }}</span>
+                    </div>
 
-                <div class="mentor-avatar">
-                    <span>{{ getInitials(session.mentorName) }}</span>
+                    <div class="session-info" style="flex: 1;">
+                        <div class="session-top" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;">
+                            <h3 style="margin: 0; font-size: 18px; font-weight: 600; color: #111827;">{{ session.topic }}</h3>
+                            <span class="status-badge" [ngClass]="getStatusClass(session.status)">
+                                {{ session.status }}
+                            </span>
+                        </div>
+
+                        <p class="mentor-name" style="margin: 4px 0 12px 0; font-size: 14px; color: #4b5563;">
+                            with <strong>{{ session.mentorName }}</strong>
+                        </p>
+
+                        <div class="session-meta" style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #6b7280; flex-wrap: wrap; margin-bottom: 8px;">
+                            <span class="meta-item">
+                                {{ getPlanIcon(session.planType) }} {{ session.planType }}
+                                <span *ngIf="session.totalOccurrences > 1"> - {{ session.totalOccurrences }} sessions</span>
+                            </span>
+                            <span class="meta-dot">·</span>
+                            <span class="meta-item">Booked: {{ formatDate(session.createdAt) }}</span>
+                        </div>
+
+                        <div class="session-schedule" *ngIf="session.scheduledAt" style="font-size: 13px; color: #374151; margin-bottom: 12px;">
+                            📅 <strong>{{ formatDate(session.scheduledAt) }}</strong>
+                            <span *ngIf="session.durationMinutes"> · {{ session.durationMinutes }} mins</span>
+                        </div>
+
+                        <div class="meeting-link-box" *ngIf="session.status === 'ACCEPTED' && session.meetingLink" style="display: flex; align-items: center; justify-content: space-between; background: #eff6ff; border: 1px solid #bfdbfe; padding: 12px; border-radius: 8px; margin-top: 8px;">
+                            <span style="font-size: 13px; color: #1e40af;">🎥 <strong>Meeting Ready!</strong> Access your class space dashboard inside the grid timeline below or join directly.</span>
+                            <a [href]="session.meetingLink" target="_blank" class="join-btn"
+                               (click)="$event.stopPropagation()"
+                               style="background: #2563eb; color: #ffffff; padding: 6px 14px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 500;">
+                                Join Meeting
+                            </a>
+                        </div>
+
+                        <div class="pending-msg" *ngIf="session.status === 'PENDING'" style="font-size: 13px; color: #d97706; background: #fffbeb; border: 1px solid #fde68a; padding: 10px; border-radius: 6px; margin-top: 8px;">
+                            ⏳ Waiting for mentor to review assignments, accept request configurations, and share meeting links.
+                        </div>
+
+                        <div class="rejection-note" *ngIf="session.status === 'REJECTED'" style="background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 12px; border-radius: 6px; margin-top: 8px; font-size: 13px; line-height: 1.5;">
+                            <span class="rej-label" style="font-weight: 700; display: block; margin-bottom: 4px;">Reason from Mentor:</span> 
+                            {{ session.rejectionReason || 'No descriptive feedback log statement was submitted by the mentor.' }}
+                        </div>
+
+                        <div class="rejection-note" *ngIf="session.status === 'CANCELLED'" style="background: #f3f4f6; border: 1px solid #e5e7eb; color: #4b5563; padding: 10px; border-radius: 6px; margin-top: 8px; font-size: 13px;">
+                            <span class="rej-label" style="font-weight: 600;">Status Notice:</span> This contract session allocation package has been terminated and cancelled.
+                        </div>
+
+                        <div class="completed-note" *ngIf="session.status === 'COMPLETED'" style="font-size: 13px; color: #065f46; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 10px; border-radius: 6px; margin-top: 8px;">
+                            ✅ Session completed successfully! Don't forget to submit feedback and leave a mentor review.
+                        </div>
+                    </div>
                 </div>
 
-                <div class="session-info">
-                    <div class="session-top">
-                        <h3>{{ session.topic }}</h3>
-                        <span class="status-badge" [ngClass]="getStatusClass(session.status)">
-                            {{ session.status }}
-                        </span>
-                    </div>
-
-                    <p class="mentor-name">
-                        with <strong>{{ session.mentorName }}</strong>
-                    </p>
-
-                    <div class="session-meta">
-                        <span class="meta-item">
-                            {{ getPlanIcon(session.planType) }} {{ session.planType }}
-                            <span *ngIf="session.totalOccurrences > 1"> - {{ session.totalOccurrences }} sessions</span>
-                        </span>
-                        <span class="meta-dot">·</span>
-                        <span class="meta-item">Booked: {{ formatDate(session.createdAt) }}</span>
-                    </div>
-
-                    <!-- Scheduled date and time -->
-                    <div class="session-schedule" *ngIf="session.scheduledAt">
-                        📅 <strong>{{ formatDate(session.scheduledAt) }}</strong>
-                        <span *ngIf="session.durationMinutes"> · {{ session.durationMinutes }} mins</span>
-                    </div>
-
-                    <!-- Meeting link — shown when ACCEPTED -->
-                    <div class="meeting-link-box" *ngIf="session.status === 'ACCEPTED' && session.meetingLink">
-                        🎥 <strong>Meeting Ready!</strong>
-                        <a [href]="session.meetingLink" target="_blank" class="join-btn"
-                           (click)="$event.stopPropagation()">
-                            Join Meeting
-                        </a>
-                    </div>
-
-                    <!-- Waiting message — shown when PENDING -->
-                    <div class="pending-msg" *ngIf="session.status === 'PENDING'">
-                        ⏳ Waiting for mentor to accept and share meeting link
-                    </div>
-
-                    <!-- Rejection note -->
-                    <div class="rejection-note" *ngIf="session.status === 'REJECTED'">
-                        <span class="rej-label">Status:</span> Session was rejected by mentor.
-                    </div>
-
-                    <!-- Cancelled note -->
-                    <div class="rejection-note" *ngIf="session.status === 'CANCELLED'">
-                        <span class="rej-label">Status:</span> Session was cancelled.
-                    </div>
-
-                    <!-- Completed note -->
-                    <div class="completed-note" *ngIf="session.status === 'COMPLETED'">
-                        ✅ Session completed! Don't forget to leave a review.
+                <div class="student-timeline-section" 
+                     *ngIf="session.occurrences && session.occurrences.length > 0" 
+                     style="margin-top: 14px; border-top: 1px dashed #e5e7eb; padding-top: 14px; width: 100%;">
+                    
+                    <h4 style="margin: 0 0 10px 0; font-size: 12px; color: #4b5563; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">
+                        Package Timeline Scheduling Grid Breakdown
+                    </h4>
+                    
+                    <div style="overflow-x: auto; border: 1px solid #f3f4f6; border-radius: 8px;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 12px;">
+                            <thead>
+                                <tr style="background-color: #f9fafb; border-bottom: 1px solid #e5e7eb;">
+                                    <th style="padding: 8px 12px; color: #6b7280; font-weight: 600;">Slot Date/Time</th>
+                                    <th style="padding: 8px 12px; color: #6b7280; font-weight: 600;">Duration</th>
+                                    <th style="padding: 8px 12px; color: #6b7280; font-weight: 600;">Status</th>
+                                    <th style="padding: 8px 12px; color: #6b7280; font-weight: 600;">Class Workspace Link</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let occurrence of session.occurrences" style="border-bottom: 1px solid #f3f4f6; transition: background 0.2s ease;" onmouseover="this.style.backgroundColor='#fafafa'" onmouseout="this.style.backgroundColor='transparent'">
+                                    <td style="padding: 10px 12px; font-weight: 500; color: #111827;">
+                                        {{ occurrence.scheduledAt | date:'medium' }}
+                                    </td>
+                                    <td style="padding: 10px 12px; color: #4b5563;">
+                                        {{ occurrence.durationMinutes }} mins
+                                    </td>
+                                    <td style="padding: 10px 12px;">
+                                        <span style="padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; text-transform: uppercase; display: inline-block;"
+                                              [ngClass]="{
+                                                'status-pending': occurrence.status === 'PENDING',
+                                                'status-accepted': occurrence.status === 'ACCEPTED',
+                                                'status-rejected': occurrence.status === 'REJECTED' || occurrence.status === 'CANCELLED' || occurrence.status === 'COMPLETED'
+                                              }">
+                                            {{ occurrence.status }}
+                                        </span>
+                                    </td>
+                                    <td style="padding: 10px 12px;">
+                                        <a *ngIf="occurrence.meetingLink && occurrence.status === 'ACCEPTED'" 
+                                           [href]="occurrence.meetingLink" 
+                                           target="_blank" 
+                                           style="color: #2563eb; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">
+                                            Join Class Live
+                                        </a>
+                                        <span *ngIf="!occurrence.meetingLink || occurrence.status !== 'ACCEPTED'" 
+                                              style="color: #9ca3af; font-style: italic;">
+                                            {{ occurrence.status === 'COMPLETED' ? 'Session Finished' : 'Link Not Generated' }}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
-                <div class="card-arrow">&gt;</div>
 
             </div>
         </div>

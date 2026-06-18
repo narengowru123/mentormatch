@@ -42,7 +42,7 @@ export class MySessionsComponent implements OnInit {
   ngOnInit(): void {
     this.sessionService.getMySessions().subscribe({
       next: (sessions) => {
-        this.allSessions = sessions;
+        this.allSessions = sessions || [];
         this.updateTabCounts();
         this.applyTab('ALL');
         this.loading = false;
@@ -107,6 +107,7 @@ export class MySessionsComponent implements OnInit {
     };
     return map[plan] ?? '📅';
   }
+
   goback(): void {
     this.router.navigate(['/student/dashboard']);
   }

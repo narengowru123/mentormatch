@@ -6,6 +6,7 @@ import { MentorProfileService } from './services/mentor-profile.service';
 import { SessionManagementService } from './services/session.service';
 import { SessionResponse } from './models/session.model';
 import { NotificationService } from './services/notification.service';
+
 @Component({
   selector: 'app-mentor-dashboard',
   templateUrl: './mentor-dashboard.component.html',
@@ -14,6 +15,7 @@ import { NotificationService } from './services/notification.service';
 export class MentorDashboardComponent implements OnInit {
   activeTab: 'profile' | 'sessions' = 'profile';
 
+  // Profile fields
   form!: FormGroup;
   profile: MentorProfile | null = null;
   skillTags: string[] = [];
@@ -26,20 +28,28 @@ export class MentorDashboardComponent implements OnInit {
   saveSuccess = false;
   errorMsg = '';
   unreadCount = 0;
+
+  // Session Fields
   sessionsList: SessionResponse[] = [];
   sessionsLoading = false;
   sessionActionRunning = false;
 
+  // Accept Modal Configurations
   showAcceptModal = false;
   selectedSessionId: number | null = null;
   inputMeetingLink = '';
 
+  // Reject Modal Configurations
+  showRejectModal = false;
+  selectedRejectSessionId: number | null = null;
+  rejectionReasonText = '';
+
   constructor(
-      private fb: FormBuilder,
-      private mentorService: MentorProfileService,
-      private authService: AuthService,
-      private sessionService: SessionManagementService,
-      private notificationService: NotificationService
+    private fb: FormBuilder,
+    private mentorService: MentorProfileService,
+    private authService: AuthService,
+    private sessionService: SessionManagementService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -75,6 +85,7 @@ export class MentorDashboardComponent implements OnInit {
     });
   }
 
+  // --- Acceptance Action Modals ---
   openAcceptWindow(id: number): void {
     this.selectedSessionId = id;
     this.inputMeetingLink = '';
@@ -103,22 +114,36 @@ export class MentorDashboardComponent implements OnInit {
     });
   }
 
-  executeRejection(id: number): void {
-    if (!confirm('Are you sure you want to decline this student request?')) return;
+  // --- Rejection Modal Handlers ---
+  openRejectionModal(id: number): void {
+    this.selectedRejectSessionId = id;
+    this.rejectionReasonText = '';
+    this.showRejectModal = true;
+  }
+
+  closeRejectionModal(): void {
+    this.showRejectModal = false;
+    this.selectedRejectSessionId = null;
+  }
+
+  confirmRejection(): void {
+    if (!this.rejectionReasonText.trim() || !this.selectedRejectSessionId) return;
 
     this.sessionActionRunning = true;
-    this.sessionService.rejectSession(id).subscribe({
+    this.sessionService.rejectSession(this.selectedRejectSessionId, this.rejectionReasonText.trim()).subscribe({
       next: () => {
         this.sessionActionRunning = false;
+        this.closeRejectionModal();
         this.loadSessionRequests();
       },
       error: () => {
         this.sessionActionRunning = false;
-        alert('Could not reject request.');
+        alert('Could not reject request. Verify connection.');
       }
     });
   }
 
+  // --- Occurrence Cancellation Handlers ---
   executeOccurrenceCancel(occurrenceId: number): void {
     if (!confirm('Cancel this specific timeline occurrence slot? Student will be updated.')) return;
 
@@ -135,8 +160,7 @@ export class MentorDashboardComponent implements OnInit {
     });
   }
 
-  // ── Profile handlers ──────────────────────────────
-
+  // --- Profile Logic Matrix ---
   loadProfile(): void {
     this.loading = true;
     this.errorMsg = '';
@@ -268,17 +292,14 @@ export class MentorDashboardComponent implements OnInit {
     return Math.round((fields.filter(Boolean).length / fields.length) * 100);
   }
 
-  // ── LOGOUT ───────────────────────────────────────
-  logout(): void {
-    this.authService.logout();
-  }
+  logout(): void { this.authService.logout(); }
 
   loadUnreadCount(): void {
     this.notificationService.getUnreadCount().subscribe({
       next: (count) => { this.unreadCount = count; },
       error: () => { this.unreadCount = 0; }
     });
-}
+  }
 
   private resetForm(): void { this.form.reset({ industry: '', hourlyRate: null, bio: '' }); }
 }

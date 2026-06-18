@@ -4,7 +4,6 @@
 
     <ng-container *ngIf="!loading">
 
-        <!-- Header with logout -->
         <div class="dash-header">
             <div class="header-left">
                 <div class="avatar-wrap">
@@ -17,29 +16,28 @@
             </div>
 
             <div class="header-actions">
-    <!-- Notification Bell -->
-    <button type="button" class="notif-bell-btn" routerLink="/mentor/notifications">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-        </svg>
-        <span class="notif-badge" *ngIf="unreadCount > 0">{{ unreadCount }}</span>
-    </button>
+                <button type="button" class="notif-bell-btn" routerLink="/mentor/notifications">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                    <span class="notif-badge" *ngIf="unreadCount > 0">{{ unreadCount }}</span>
+                </button>
 
-    <button
-            type="button"
-            class="availability-btn"
-            [class.available]="profile?.isAvailable"
-            [disabled]="!profile || availabilitySaving"
-            (click)="toggleAvailability()">
-        <span class="dot"></span>
-        {{ profile?.isAvailable ? 'Available' : 'Unavailable' }}
-    </button>
+                <button
+                    type="button"
+                    class="availability-btn"
+                    [class.available]="profile?.isAvailable"
+                    [disabled]="!profile || availabilitySaving"
+                    (click)="toggleAvailability()">
+                    <span class="dot"></span>
+                    {{ profile?.isAvailable ? 'Available' : 'Unavailable' }}
+                </button>
 
-    <button type="button" class="logout-btn" (click)="logout()">
-        ⏻ Logout
-    </button>
-</div>
+                <button type="button" class="logout-btn" (click)="logout()">
+                    ⏻ Logout
+                </button>
+            </div>
         </div>
 
         <div class="nav-tabs">
@@ -66,16 +64,16 @@
                     <label for="industry">Industry <span class="req">*</span></label>
                     <input id="industry" type="text" formControlName="industry" placeholder="Software / IT" />
                     <span class="err" *ngIf="form.get('industry')?.invalid && form.get('industry')?.touched">
-            Required, max 100 characters
-          </span>
+                        Required, max 100 characters
+                    </span>
                 </div>
 
                 <div class="field">
                     <label for="hourlyRate">Hourly rate in rupees</label>
                     <input id="hourlyRate" type="number" min="0" max="100000" formControlName="hourlyRate" placeholder="e.g. 500" />
                     <span class="err" *ngIf="form.get('hourlyRate')?.invalid && form.get('hourlyRate')?.touched">
-            Enter a value between 0 and 100000
-          </span>
+                        Enter a value between 0 and 100000
+                    </span>
                 </div>
 
                 <div class="field">
@@ -90,10 +88,10 @@
                 <div class="skills-block">
                     <label>Skills</label>
                     <div class="tags-box" (click)="skillEl.focus()">
-            <span class="tag" *ngFor="let skill of skillTags">
-              {{ skill }}
-                <button type="button" class="tag-x" (click)="removeSkill(skill)">x</button>
-            </span>
+                        <span class="tag" *ngFor="let skill of skillTags">
+                            {{ skill }}
+                            <button type="button" class="tag-x" (click)="removeSkill(skill)">x</button>
+                        </span>
                         <input
                             #skillEl
                             class="tag-input"
@@ -135,18 +133,13 @@
 
                     <div class="session-card-header">
                         <div>
-              <span class="badge-plan"
-                    [class.monthly]="session.planType === 'MONTHLY'"
-                    [class.weekly]="session.planType === 'WEEKLY'">
-                {{ session.planType }} Package
-              </span>
+                            <span class="badge-plan"
+                                  [class.monthly]="session.planType === 'MONTHLY'"
+                                  [class.weekly]="session.planType === 'WEEKLY'">
+                                {{ session.planType }} Package
+                            </span>
                             <h3>Topic: {{ session.topic }}</h3>
-                            <p class="student-info">Requested By: <strong>{{ session.studentName }}</strong></p>
-                            <!-- Show scheduled time if available -->
-                            <p class="schedule-info" *ngIf="session.scheduledAt">
-                                📅 {{ session.scheduledAt | date:'medium' }}
-                                <span *ngIf="session.durationMinutes"> · {{ session.durationMinutes }} mins</span>
-                            </p>
+                            <p class="student-info">Requested By: <strong>{{ session.studentName }}</strong> ({{ session.studentEmail }})</p>
                         </div>
 
                         <div class="action-status-block">
@@ -156,26 +149,57 @@
                                         (click)="openAcceptWindow(session.id)">Accept</button>
                                 <button type="button" class="btn-action reject"
                                         [disabled]="sessionActionRunning"
-                                        (click)="executeRejection(session.id)">Reject</button>
-                            </div>
-
-                            <!-- Show complete button for accepted sessions -->
-                            <div class="btn-group" *ngIf="session.status === 'ACCEPTED'">
-                                <span class="status-indicator-badge" data-status="ACCEPTED">ACCEPTED</span>
+                                        (click)="openRejectionModal(session.id)">Reject</button>
                             </div>
 
                             <span class="status-indicator-badge"
-                                  *ngIf="session.status !== 'PENDING' && session.status !== 'ACCEPTED'"
+                                  *ngIf="session.status !='PENDING'"
                                   [attr.data-status]="session.status">
-                {{ session.status }}
-              </span>
+                                {{ session.status }}
+                            </span>
                         </div>
                     </div>
 
-                    <!-- Show meeting link if accepted -->
-                    <div class="meeting-link-row" *ngIf="session.status === 'ACCEPTED' && session.meetingLink">
-                        <span class="meet-label">🎥 Meeting Link:</span>
-                        <a [href]="session.meetingLink" target="_blank" class="meet-link">{{ session.meetingLink }}</a>
+                    <div class="timeline-breakdown" style="background: #f9fafb; border-radius: 8px; padding: 16px; border: 1px solid #f3f4f6; margin-top: 14px;">
+                        <h4 style="margin: 0 0 12px 0; font-size: 13px; color: #374151; text-transform: uppercase; letter-spacing: 0.03em;">Segregated Schedule Timestamps ({{ session.totalOccurrences }} slots)</h4>
+                        <table class="timeline-table" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 13px;">
+                            <thead>
+                                <tr>
+                                    <th style="color: #6b7280; font-weight: 600; padding: 8px; border-bottom: 2px solid #e5e7eb;">Date & Time</th>
+                                    <th style="color: #6b7280; font-weight: 600; padding: 8px; border-bottom: 2px solid #e5e7eb;">Duration</th>
+                                    <th style="color: #6b7280; font-weight: 600; padding: 8px; border-bottom: 2px solid #e5e7eb;">Meeting Link Reference</th>
+                                    <th style="color: #6b7280; font-weight: 600; padding: 8px; border-bottom: 2px solid #e5e7eb;">Status</th>
+                                    <th style="color: #6b7280; font-weight: 600; padding: 8px; border-bottom: 2px solid #e5e7eb;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let occurrence of session.occurrences">
+                                    <td style="padding: 10px 8px; border-bottom: 1px solid #e5e7eb;"><strong>{{ occurrence.scheduledAt | date:'medium' }}</strong></td>
+                                    <td style="padding: 10px 8px; border-bottom: 1px solid #e5e7eb;">{{ occurrence.durationMinutes }} mins</td>
+                                    <td style="padding: 10px 8px; border-bottom: 1px solid #e5e7eb;">
+                                        <a *ngIf="occurrence.meetingLink" [href]="occurrence.meetingLink" target="_blank" style="color: #2563eb; text-decoration: none; font-weight: 500;">Join Class Space</a>
+                                        <span *ngIf="!occurrence.meetingLink" style="color: #9ca3af; font-style: italic;">Not Generated</span>
+                                    </td>
+                                    <td style="padding: 10px 8px; border-bottom: 1px solid #e5e7eb;">
+                                        <span class="mini-status" [attr.data-status]="occurrence.status" style="display: inline-block; font-size: 11px; font-weight: 500; padding: 1px 6px; border-radius: 4px; text-transform: uppercase;">{{ occurrence.status }}</span>
+                                    </td>
+                                    <td style="padding: 10px 8px; border-bottom: 1px solid #e5e7eb;">
+                                        <button type="button" 
+                                                class="btn-mini-cancel" 
+                                                *ngIf="occurrence.status === 'ACCEPTED' || occurrence.status === 'PENDING'" 
+                                                [disabled]="sessionActionRunning"
+                                                (click)="executeOccurrenceCancel(occurrence.id)"
+                                                style="background: none; border: 1px solid #d1d5db; color: #dc2626; padding: 2px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; font-weight: 500;">
+                                            Cancel Slot
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="rejection-note" *ngIf="session.status === 'REJECTED' && session.rejectionReason" style="margin-top: 12px; background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 10px; border-radius: 6px; font-size: 13px;">
+                        <strong>Log Reason provided to student:</strong> {{ session.rejectionReason }}
                     </div>
 
                 </div>
@@ -185,7 +209,6 @@
     </ng-container>
 </div>
 
-<!-- Accept modal -->
 <div class="modal-overlay" *ngIf="showAcceptModal">
     <div class="modal-container card">
         <h3>Configure Session Meeting Space</h3>
@@ -204,6 +227,28 @@
                 {{ sessionActionRunning ? 'Saving...' : 'Confirm & Generate Emails' }}
             </button>
             <button type="button" class="btn-secondary" (click)="closeAcceptWindow()">Dismiss</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" *ngIf="showRejectModal">
+    <div class="modal-container card">
+        <h3 style="color: #dc2626;">Reject Session Booking Request</h3>
+        <p>Please enter a reason explaining to the student why this session cannot be accepted at this time:</p>
+
+        <div class="field">
+            <textarea [(ngModel)]="rejectionReasonText" rows="4"
+                      placeholder="e.g., I am fully booked during your selected timestamps. Please request a new slot on Friday afternoon instead."
+                      style="width: 100%; box-sizing: border-box; padding: 10px; border: 1px solid #d1d5db; border-radius: 8px; font-family: inherit; font-size: 14px; resize: vertical;"></textarea>
+        </div>
+
+        <div class="confirm-row">
+            <button type="button" class="btn-danger"
+                    [disabled]="!rejectionReasonText.trim() || sessionActionRunning"
+                    (click)="confirmRejection()" style="background: #dc2626; color: white; border: none; padding: 9px 18px; border-radius: 8px; font-weight: 500; cursor: pointer;">
+                {{ sessionActionRunning ? 'Declining...' : 'Confirm Rejection' }}
+            </button>
+            <button type="button" class="btn-secondary" (click)="closeRejectionModal()">Dismiss</button>
         </div>
     </div>
 </div>

@@ -36,7 +36,7 @@ export class NotificationService {
             connectHeaders: { Authorization: `Bearer ${token}` },
             reconnectDelay: 5000,
             onConnect: () => {
-                this.stompClient!.subscribe('/user/queue/notifications', (frame) => {
+                this.stompClient!.subscribe('/user/queue/notifications', (frame:any) => {
                     const incoming: NotificationItem = JSON.parse(frame.body);
                     const current = this._notifications$.getValue();
                     this._notifications$.next([incoming, ...current]);

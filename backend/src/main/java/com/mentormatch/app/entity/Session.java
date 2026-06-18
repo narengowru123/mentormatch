@@ -58,6 +58,10 @@ public class Session {
     @Column(name = "meeting_link", length = 500)
     private String meetingLink;
 
+    // NEW: Text field to record why a mentor declined the application request
+    @Column(name = "rejection_reason", length = 1000)
+    private String rejectionReason;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
@@ -99,6 +103,10 @@ public class Session {
 
     public String getMeetingLink() { return meetingLink; }
     public void setMeetingLink(String meetingLink) { this.meetingLink = meetingLink; }
+
+    // NEW: Getters and Setters for the missing field
+    public String getRejectionReason() { return rejectionReason; }
+    public void setRejectionReason(String rejectionReason) { this.rejectionReason = rejectionReason; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
 
