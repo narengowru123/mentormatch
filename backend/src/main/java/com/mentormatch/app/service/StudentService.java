@@ -63,7 +63,7 @@ public class StudentService {
 
         return mapToResponse(studentRepo.save(profile));
     }
-
+    // student profile
     private StudentProfileResponse mapToResponse(StudentProfile profile) {
         StudentProfileResponse res = new StudentProfileResponse();
         res.setId(profile.getId());
