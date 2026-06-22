@@ -1,37 +1,38 @@
 <!-- src/app/features/student/notifications/notifications.component.html -->
-<app-student-navbar></app-student-navbar>
-<div class="page">
+<app-student-navbar id="notifications-app-student-navbar-1"></app-student-navbar>
+<div id="notifications-div-2" class="page">
 
-    <div class="page-header">
-        <div>
-            <h1>Notifications</h1>
-            <p class="sub">All your alerts in one place</p>
+    <div id="notifications-div-3" class="page-header">
+        <div id="notifications-div-4">
+            <h1 id="notifications-h1-5">Notifications</h1>
+            <p id="notifications-p-6" class="sub">All your alerts in one place</p>
         </div>
-        <button class="btn-primary" *ngIf="notifications.length > 0" (click)="markAllRead()">
+        <button id="notifications-button-7" class="btn-primary" *ngIf="notifications.length > 0" (click)="markAllRead()">
             Mark all as read
         </button>
     </div>
 
-    <div *ngIf="loading" class="state-msg">Loading…</div>
+    <div id="notifications-div-8" *ngIf="loading" class="state-msg">Loading…</div>
 
-    <div *ngIf="!loading && notifications.length === 0" class="state-msg">
+    <div id="notifications-div-9" *ngIf="!loading && notifications.length === 0" class="state-msg">
         No notifications yet.
     </div>
 
-    <div class="notif-list" *ngIf="!loading && notifications.length > 0">
+    <div id="notifications-div-10" class="notif-list" *ngIf="!loading && notifications.length > 0">
         <div
-                *ngFor="let n of notifications"
+        [id]="'notifications-div-11-' + nIndex1"
+                *ngFor="let n of notifications; let nIndex1 = index"
                 class="notif-card"
                 [class.unread]="!n.isRead"
                 (click)="onClickNotification(n)">
 
-            <div class="notif-dot" *ngIf="!n.isRead"></div>
-            <div class="notif-body">
-                <div class="notif-top">
-                    <span class="notif-title">{{ n.title }}</span>
-                    <span class="notif-time">{{ formatDate(n.createdAt) }}</span>
+            <div [id]="'notifications-div-12-' + nIndex1" class="notif-dot" *ngIf="!n.isRead"></div>
+            <div id="notifications-div-13" class="notif-body">
+                <div id="notifications-div-14" class="notif-top">
+                    <span id="notifications-span-15" class="notif-title">{{ n.title }}</span>
+                    <span id="notifications-span-16" class="notif-time">{{ formatDate(n.createdAt) }}</span>
                 </div>
-                <span class="notif-msg">{{ n.message }}</span>
+                <span id="notifications-span-17" class="notif-msg">{{ n.message }}</span>
             </div>
         </div>
     </div>

@@ -1,16 +1,16 @@
 <!-- src/app/features/admin/components/sessions/sessions.component.html -->
 
-<div class="sessions-container">
+<div id="sessions-div-1" class="sessions-container">
   <!-- Page Header -->
-  <div class="page-header">
-    <div>
-      <h1 class="page-title">Sessions</h1>
-      <p class="page-subtitle">Monitor and manage all mentorship sessions</p>
+  <div id="sessions-div-2" class="page-header">
+    <div id="sessions-div-3">
+      <h1 id="sessions-h1-4" class="page-title">Sessions</h1>
+      <p id="sessions-p-5" class="page-subtitle">Monitor and manage all mentorship sessions</p>
     </div>
-    <div class="header-actions">
+    <div id="sessions-div-6" class="header-actions">
       <!-- Search Bar -->
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
+      <div id="sessions-div-7" class="search-box">
+        <span id="sessions-span-8" class="search-icon">🔍</span>
         <input 
           id="sessions-search-input"
           type="text" 
@@ -20,102 +20,102 @@
       </div>
       
       <!-- Status Filter -->
-      <div class="filter-group">
+      <div id="sessions-div-10" class="filter-group">
         <select 
           id="sessions-status-filter"
           class="status-filter"
           [(ngModel)]="selectedStatus" 
           (change)="onFilterChange()">
-          <option *ngFor="let option of statusOptions" [value]="option.value">
+          <option [id]="'sessions-option-12-' + optionIndex1" *ngFor="let option of statusOptions; let optionIndex1 = index" [value]="option.value">
             {{ option.label }}
           </option>
         </select>
       </div>
       
-      <span class="stat-badge">{{ filteredSessions.length }} Sessions</span>
+      <span id="sessions-span-13" class="stat-badge">{{ filteredSessions.length }} Sessions</span>
     </div>
   </div>
 
   <!-- Loading State -->
-  <div *ngIf="loading" class="loading-state">
-    <div class="spinner"></div>
-    <p>Loading sessions...</p>
+  <div id="sessions-div-14" *ngIf="loading" class="loading-state">
+    <div id="sessions-div-15" class="spinner"></div>
+    <p id="sessions-p-16">Loading sessions...</p>
   </div>
 
   <!-- Error State -->
-  <div *ngIf="error && !loading" class="error-state">
-    <p>{{ error }}</p>
-    <button class="retry-btn" (click)="loadSessions()">Retry</button>
+  <div id="sessions-div-17" *ngIf="error && !loading" class="error-state">
+    <p id="sessions-p-18">{{ error }}</p>
+    <button id="sessions-button-19" class="retry-btn" (click)="loadSessions()">Retry</button>
   </div>
 
   <!-- Sessions Table -->
-  <div *ngIf="!loading && !error" class="table-container">
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Student</th>
-          <th>Mentor</th>
-          <th>Topic</th>
-          <th>Plan</th>
-          <th>Status</th>
-          <th>Created</th>
-          <th>Actions</th>
+  <div id="sessions-div-20" *ngIf="!loading && !error" class="table-container">
+    <table id="sessions-table-21" class="data-table">
+      <thead id="sessions-thead-22">
+        <tr id="sessions-tr-23">
+          <th id="sessions-th-24">ID</th>
+          <th id="sessions-th-25">Student</th>
+          <th id="sessions-th-26">Mentor</th>
+          <th id="sessions-th-27">Topic</th>
+          <th id="sessions-th-28">Plan</th>
+          <th id="sessions-th-29">Status</th>
+          <th id="sessions-th-30">Created</th>
+          <th id="sessions-th-31">Actions</th>
         </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let session of filteredSessions">
-          <td class="id-cell">#{{ session.sessionId }}</td>
+      <tbody id="sessions-tbody-32">
+        <tr [id]="'sessions-tr-33-' + sessionIndex2" *ngFor="let session of filteredSessions; let sessionIndex2 = index">
+          <td [id]="'sessions-td-34-' + sessionIndex2" class="id-cell">#{{ session.sessionId }}</td>
           
           <!-- Student -->
-          <td>
-            <div class="user-cell">
-              <div class="user-avatar student-avatar">
+          <td [id]="'sessions-td-35-' + sessionIndex2">
+            <div [id]="'sessions-div-36-' + sessionIndex2" class="user-cell">
+              <div [id]="'sessions-div-37-' + sessionIndex2" class="user-avatar student-avatar">
                 {{ session.studentName.charAt(0).toUpperCase() }}
               </div>
-              <div class="user-info">
-                <span class="user-name">{{ session.studentName }}</span>
-                <span class="user-email">{{ session.studentEmail }}</span>
+              <div [id]="'sessions-div-38-' + sessionIndex2" class="user-info">
+                <span [id]="'sessions-span-39-' + sessionIndex2" class="user-name">{{ session.studentName }}</span>
+                <span [id]="'sessions-span-40-' + sessionIndex2" class="user-email">{{ session.studentEmail }}</span>
               </div>
             </div>
           </td>
           
           <!-- Mentor -->
-          <td>
-            <div class="user-cell">
-              <div class="user-avatar mentor-avatar">
+          <td [id]="'sessions-td-41-' + sessionIndex2">
+            <div [id]="'sessions-div-42-' + sessionIndex2" class="user-cell">
+              <div [id]="'sessions-div-43-' + sessionIndex2" class="user-avatar mentor-avatar">
                 {{ session.mentorName.charAt(0).toUpperCase() }}
               </div>
-              <div class="user-info">
-                <span class="user-name">{{ session.mentorName }}</span>
-                <span class="user-email">{{ session.mentorEmail }}</span>
+              <div [id]="'sessions-div-44-' + sessionIndex2" class="user-info">
+                <span [id]="'sessions-span-45-' + sessionIndex2" class="user-name">{{ session.mentorName }}</span>
+                <span [id]="'sessions-span-46-' + sessionIndex2" class="user-email">{{ session.mentorEmail }}</span>
               </div>
             </div>
           </td>
           
           <!-- Topic -->
-          <td class="topic-cell">{{ session.topic }}</td>
+          <td [id]="'sessions-td-47-' + sessionIndex2" class="topic-cell">{{ session.topic }}</td>
           
           <!-- Plan Type -->
-          <td>
-            <span class="plan-badge" [ngClass]="getPlanTypeClass(session.planType)">
+          <td [id]="'sessions-td-48-' + sessionIndex2">
+            <span [id]="'sessions-span-49-' + sessionIndex2" class="plan-badge" [ngClass]="getPlanTypeClass(session.planType)">
               {{ session.planType }}
             </span>
           </td>
           
           <!-- Status -->
-          <td>
-            <span class="status-badge" [ngClass]="getStatusClass(session.status)">
+          <td [id]="'sessions-td-50-' + sessionIndex2">
+            <span [id]="'sessions-span-51-' + sessionIndex2" class="status-badge" [ngClass]="getStatusClass(session.status)">
               {{ session.status }}
             </span>
           </td>
           
           <!-- Created Date -->
-          <td class="date-cell">{{ formatDate(session.createdAt) }}</td>
+          <td [id]="'sessions-td-52-' + sessionIndex2" class="date-cell">{{ formatDate(session.createdAt) }}</td>
           
           <!-- Actions -->
-          <td class="actions-cell">
-            <div class="action-buttons">
+          <td [id]="'sessions-td-53-' + sessionIndex2" class="actions-cell">
+            <div [id]="'sessions-div-54-' + sessionIndex2" class="action-buttons">
               <!-- Cancel Button -->
               <button 
                 [id]="'admin-cancel-session-btn-' + session.sessionId"
@@ -151,12 +151,12 @@
     </table>
 
     <!-- Empty State -->
-    <div *ngIf="filteredSessions.length === 0" class="empty-state">
-      <div class="empty-icon">📅</div>
-      <h3>No sessions found</h3>
-      <p *ngIf="selectedStatus === 'ALL' && !searchQuery">There are currently no sessions in the system.</p>
-      <p *ngIf="selectedStatus !== 'ALL'">No sessions with status "{{ selectedStatus }}" found.</p>
-      <p *ngIf="searchQuery">No sessions match your search "{{ searchQuery }}"</p>
+    <div id="sessions-div-58" *ngIf="filteredSessions.length === 0" class="empty-state">
+      <div id="sessions-div-59" class="empty-icon">📅</div>
+      <h3 id="sessions-h3-60">No sessions found</h3>
+      <p id="sessions-p-61" *ngIf="selectedStatus === 'ALL' && !searchQuery">There are currently no sessions in the system.</p>
+      <p id="sessions-p-62" *ngIf="selectedStatus !== 'ALL'">No sessions with status "{{ selectedStatus }}" found.</p>
+      <p id="sessions-p-63" *ngIf="searchQuery">No sessions match your search "{{ searchQuery }}"</p>
     </div>
   </div>
 </div>

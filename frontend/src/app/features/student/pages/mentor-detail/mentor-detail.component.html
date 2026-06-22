@@ -1,33 +1,33 @@
 <!-- src/app/features/student/pages/mentor-detail/mentor-detail.component.html -->
-<app-student-navbar></app-student-navbar>
-<div class="detail-page">
-    <button class="back-btn" type="button" (click)="goBack()">← Back to mentors</button>
+<app-student-navbar id="mentor-detail-app-student-navbar-1"></app-student-navbar>
+<div id="mentor-detail-div-2" class="detail-page">
+    <button id="mentor-detail-button-3" class="back-btn" type="button" (click)="goBack()">← Back to mentors</button>
 
-    <div *ngIf="loading" class="state-msg">Loading mentor profile...</div>
-    <div *ngIf="errorMsg" class="banner error">{{ errorMsg }}</div>
+    <div id="mentor-detail-div-4" *ngIf="loading" class="state-msg">Loading mentor profile...</div>
+    <div id="mentor-detail-div-5" *ngIf="errorMsg" class="banner error">{{ errorMsg }}</div>
 
     <ng-container *ngIf="!loading && mentor">
 
         <!-- Profile header -->
-        <div class="profile-head">
-            <div class="avatar-wrap">
-                <div class="avatar">{{ initials }}</div>
-                <span class="avail-dot" [class.online]="mentor.isAvailable"></span>
+        <div id="mentor-detail-div-6" class="profile-head">
+            <div id="mentor-detail-div-7" class="avatar-wrap">
+                <div id="mentor-detail-div-8" class="avatar">{{ initials }}</div>
+                <span id="mentor-detail-span-9" class="avail-dot" [class.online]="mentor.isAvailable"></span>
             </div>
 
-            <div class="head-info">
-                <h1>{{ mentor.user.fullName }}</h1>
-                <p class="sub-industry">{{ mentor.industry || 'Industry not set' }}</p>
-                <div class="rating-row">
-                    <span class="stars">{{ getRatingStars(mentor.rating) }}</span>
-                    <span class="rating-num">{{ mentor.rating.toFixed(1) }}</span>
+            <div id="mentor-detail-div-10" class="head-info">
+                <h1 id="mentor-detail-h1-11">{{ mentor.user.fullName }}</h1>
+                <p id="mentor-detail-p-12" class="sub-industry">{{ mentor.industry || 'Industry not set' }}</p>
+                <div id="mentor-detail-div-13" class="rating-row">
+                    <span id="mentor-detail-span-14" class="stars">{{ getRatingStars(mentor.rating) }}</span>
+                    <span id="mentor-detail-span-15" class="rating-num">{{ mentor.rating.toFixed(1) }}</span>
                 </div>
-                <p class="hourly-rate" *ngIf="mentor.hourlyRate && mentor.hourlyRate > 0">
+                <p id="mentor-detail-p-16" class="hourly-rate" *ngIf="mentor.hourlyRate && mentor.hourlyRate > 0">
                     ₹{{ mentor.hourlyRate }} / hour
                 </p>
             </div>
 
-            <div class="head-actions">
+            <div id="mentor-detail-div-17" class="head-actions">
                 <button
                         id="book-session-btn"
                         class="btn-book"
@@ -35,92 +35,92 @@
                         *ngIf="mentor.isAvailable">
                     {{ showBookingForm ? '✕ Cancel' : '📅 Book Session' }}
                 </button>
-                <span class="unavailable-badge" *ngIf="!mentor.isAvailable">
+                <span id="mentor-detail-span-19" class="unavailable-badge" *ngIf="!mentor.isAvailable">
           Currently unavailable
         </span>
             </div>
         </div>
 
         <!-- Success banner -->
-        <div class="banner success" *ngIf="bookingSuccess">
+        <div id="mentor-detail-div-20" class="banner success" *ngIf="bookingSuccess">
             ✓ {{ bookingSuccess }}
         </div>
 
         <!-- Booking form -->
-        <div class="booking-card" *ngIf="showBookingForm">
-            <p class="card-label">Book a session with {{ mentor.user.fullName }}</p>
+        <div id="mentor-detail-div-21" class="booking-card" *ngIf="showBookingForm">
+            <p id="mentor-detail-p-22" class="card-label">Book a session with {{ mentor.user.fullName }}</p>
 
             <form id="booking-form" [formGroup]="bookingForm" (ngSubmit)="onBook()" novalidate>
 
                 <!-- Topic -->
-                <div class="field">
-                    <label>Session Topic <span class="req">*</span></label>
+                <div id="mentor-detail-div-24" class="field">
+                    <label id="mentor-detail-label-25">Session Topic <span id="mentor-detail-span-26" class="req">*</span></label>
                     <input id="booking-topic" type="text" formControlName="topic"
                            placeholder="e.g. Spring Boot REST API development" />
-                    <span class="err" *ngIf="bookingForm.get('topic')?.invalid && bookingForm.get('topic')?.touched">
+                    <span id="mentor-detail-span-28" class="err" *ngIf="bookingForm.get('topic')?.invalid && bookingForm.get('topic')?.touched">
             Topic is required
           </span>
                 </div>
 
                 <!-- Date and Time row -->
-                <div class="form-row">
-                    <div class="field">
-                        <label>Preferred Date <span class="req">*</span></label>
+                <div id="mentor-detail-div-29" class="form-row">
+                    <div id="mentor-detail-div-30" class="field">
+                        <label id="mentor-detail-label-31">Preferred Date <span id="mentor-detail-span-32" class="req">*</span></label>
                         <input id="booking-date" type="date" formControlName="sessionDate" [min]="minDate"
                                (change)="bookingForm.get('sessionTime')?.reset()" />
-                        <span class="err" *ngIf="bookingForm.get('sessionDate')?.invalid && bookingForm.get('sessionDate')?.touched">
+                        <span id="mentor-detail-span-34" class="err" *ngIf="bookingForm.get('sessionDate')?.invalid && bookingForm.get('sessionDate')?.touched">
               Please select a date
             </span>
                     </div>
 
-                    <div class="field">
-                        <label>Preferred Time <span class="req">*</span></label>
+                    <div id="mentor-detail-div-35" class="field">
+                        <label id="mentor-detail-label-36">Preferred Time <span id="mentor-detail-span-37" class="req">*</span></label>
                         <input id="booking-time" type="time" formControlName="sessionTime" />
-                        <span class="err" *ngIf="bookingForm.get('sessionTime')?.invalid && bookingForm.get('sessionTime')?.touched">
+                        <span id="mentor-detail-span-39" class="err" *ngIf="bookingForm.get('sessionTime')?.invalid && bookingForm.get('sessionTime')?.touched">
                             Please select a time
                         </span>
-                        <span class="err" *ngIf="bookingForm.errors?.['pastDateTime'] && bookingForm.get('sessionTime')?.touched && bookingForm.get('sessionDate')?.touched">
+                        <span id="mentor-detail-span-40" class="err" *ngIf="bookingForm.errors?.['pastDateTime'] && bookingForm.get('sessionTime')?.touched && bookingForm.get('sessionDate')?.touched">
                             Please select a future time
                         </span>
                     </div>
                 </div>
 
                 <!-- Duration and Plan row -->
-                <div class="form-row">
-                    <div class="field">
-                        <label>Duration <span class="req">*</span></label>
+                <div id="mentor-detail-div-41" class="form-row">
+                    <div id="mentor-detail-div-42" class="field">
+                        <label id="mentor-detail-label-43">Duration <span id="mentor-detail-span-44" class="req">*</span></label>
                         <select id="booking-duration" formControlName="durationMinutes">
-                            <option *ngFor="let d of durations" [value]="d.value">{{ d.label }}</option>
+                            <option [id]="'mentor-detail-option-46-' + dIndex1" *ngFor="let d of durations; let dIndex1 = index" [value]="d.value">{{ d.label }}</option>
                         </select>
                     </div>
 
-                    <div class="field">
-                        <label>Plan Type <span class="req">*</span></label>
+                    <div id="mentor-detail-div-47" class="field">
+                        <label id="mentor-detail-label-48">Plan Type <span id="mentor-detail-span-49" class="req">*</span></label>
                         <select id="booking-plan-type" formControlName="planType">
-                            <option *ngFor="let p of planTypes" [value]="p.value">{{ p.label }}</option>
+                            <option [id]="'mentor-detail-option-51-' + pIndex2" *ngFor="let p of planTypes; let pIndex2 = index" [value]="p.value">{{ p.label }}</option>
                         </select>
                     </div>
                 </div>
 
                 <!-- No. of sessions (only for recurring) -->
-                <div class="field" *ngIf="bookingForm.value.planType !== 'SINGLE'">
-                    <label>Number of sessions <span class="req">*</span></label>
+                <div id="mentor-detail-div-52" class="field" *ngIf="bookingForm.value.planType !== 'SINGLE'">
+                    <label id="mentor-detail-label-53">Number of sessions <span id="mentor-detail-span-54" class="req">*</span></label>
                     <input id="booking-occurrences" type="number" formControlName="totalOccurrences" min="1" max="30"
                            placeholder="e.g. 4 for 4 weeks" />
                 </div>
 
                 <!-- Message -->
-                <div class="field">
-                    <label>Message to mentor</label>
+                <div id="mentor-detail-div-56" class="field">
+                    <label id="mentor-detail-label-57">Message to mentor</label>
                     <textarea id="booking-message" formControlName="message" rows="3"
                               placeholder="Introduce yourself and describe what you want to learn...">
           </textarea>
                 </div>
 
-                <div class="banner error small" *ngIf="bookingError">{{ bookingError }}</div>
+                <div id="mentor-detail-div-59" class="banner error small" *ngIf="bookingError">{{ bookingError }}</div>
 
-                <div class="form-actions">
-                    <button type="button" class="btn-ghost" (click)="toggleBookingForm()">Cancel</button>
+                <div id="mentor-detail-div-60" class="form-actions">
+                    <button id="mentor-detail-button-61" type="button" class="btn-ghost" (click)="toggleBookingForm()">Cancel</button>
                     <button id="booking-submit-btn" type="submit" class="btn-primary" [disabled]="bookingForm.invalid || booking">
                         {{ booking ? 'Sending…' : '📤 Send Session Request' }}
                     </button>
@@ -130,58 +130,58 @@
         </div>
 
         <!-- Profile cards -->
-        <div class="cards-grid">
+        <div id="mentor-detail-div-63" class="cards-grid">
 
-            <div class="card">
-                <p class="card-label">About</p>
-                <p class="bio-text">{{ mentor.bio || 'This mentor has not added a bio yet.' }}</p>
+            <div id="mentor-detail-div-64" class="card">
+                <p id="mentor-detail-p-65" class="card-label">About</p>
+                <p id="mentor-detail-p-66" class="bio-text">{{ mentor.bio || 'This mentor has not added a bio yet.' }}</p>
             </div>
 
-            <div class="card">
-                <p class="card-label">Skills</p>
-                <div class="skills-row" *ngIf="mentor.skills?.length; else noSkills">
-                    <span class="skill-tag" *ngFor="let skill of mentor.skills">{{ skill }}</span>
+            <div id="mentor-detail-div-67" class="card">
+                <p id="mentor-detail-p-68" class="card-label">Skills</p>
+                <div id="mentor-detail-div-69" class="skills-row" *ngIf="mentor.skills?.length; else noSkills">
+                    <span [id]="'mentor-detail-span-70-' + skillIndex3" class="skill-tag" *ngFor="let skill of mentor.skills; let skillIndex3 = index">{{ skill }}</span>
                 </div>
                 <ng-template #noSkills>
-                    <p class="muted">No skills listed yet.</p>
+                    <p id="mentor-detail-p-71" class="muted">No skills listed yet.</p>
                 </ng-template>
             </div>
 
         </div>
 
         <!-- Reviews section -->
-        <div class="reviews-section">
-            <div class="reviews-header">
-                <p class="card-label" style="margin:0">
+        <div id="mentor-detail-div-72" class="reviews-section">
+            <div id="mentor-detail-div-73" class="reviews-header">
+                <p id="mentor-detail-p-74" class="card-label" style="margin:0">
                     Student Reviews
-                    <span class="reviews-count" *ngIf="reviews.length > 0">({{ reviews.length }})</span>
+                    <span id="mentor-detail-span-75" class="reviews-count" *ngIf="reviews.length > 0">({{ reviews.length }})</span>
                 </p>
-                <div class="avg-rating-inline" *ngIf="reviews.length > 0">
-                    <span class="stars">{{ getReviewStars(avgRating) }}</span>
-                    <span class="rating-num">{{ avgRating.toFixed(1) }}</span>
+                <div id="mentor-detail-div-76" class="avg-rating-inline" *ngIf="reviews.length > 0">
+                    <span id="mentor-detail-span-77" class="stars">{{ getReviewStars(avgRating) }}</span>
+                    <span id="mentor-detail-span-78" class="rating-num">{{ avgRating.toFixed(1) }}</span>
                 </div>
             </div>
 
-            <div *ngIf="reviewsLoading" class="state-msg small">Loading reviews…</div>
+            <div id="mentor-detail-div-79" *ngIf="reviewsLoading" class="state-msg small">Loading reviews…</div>
 
-            <div *ngIf="!reviewsLoading && reviews.length === 0" class="muted" style="padding: 12px 0;">
+            <div id="mentor-detail-div-80" *ngIf="!reviewsLoading && reviews.length === 0" class="muted" style="padding: 12px 0;">
                 No reviews yet for this mentor.
             </div>
 
-            <div class="review-list" *ngIf="!reviewsLoading && reviews.length > 0">
-                <div class="review-card" *ngFor="let r of displayedReviews">
-                    <div class="review-top">
-                        <div class="reviewer-avatar">{{ getReviewerInitials(r.reviewerName) }}</div>
-                        <div class="reviewer-meta">
-                            <span class="reviewer-name">{{ r.reviewerName }}</span>
-                            <span class="review-date">{{ formatReviewDate(r.createdAt) }}</span>
+            <div id="mentor-detail-div-81" class="review-list" *ngIf="!reviewsLoading && reviews.length > 0">
+                <div [id]="'mentor-detail-div-82-' + rIndex4" class="review-card" *ngFor="let r of displayedReviews; let rIndex4 = index">
+                    <div [id]="'mentor-detail-div-83-' + rIndex4" class="review-top">
+                        <div [id]="'mentor-detail-div-84-' + rIndex4" class="reviewer-avatar">{{ getReviewerInitials(r.reviewerName) }}</div>
+                        <div [id]="'mentor-detail-div-85-' + rIndex4" class="reviewer-meta">
+                            <span [id]="'mentor-detail-span-86-' + rIndex4" class="reviewer-name">{{ r.reviewerName }}</span>
+                            <span [id]="'mentor-detail-span-87-' + rIndex4" class="review-date">{{ formatReviewDate(r.createdAt) }}</span>
                         </div>
-                        <span class="review-stars">{{ getReviewStars(r.rating) }}</span>
+                        <span [id]="'mentor-detail-span-88-' + rIndex4" class="review-stars">{{ getReviewStars(r.rating) }}</span>
                     </div>
-                    <p class="review-comment" *ngIf="r.comment">{{ r.comment }}</p>
+                    <p [id]="'mentor-detail-p-89-' + rIndex4" class="review-comment" *ngIf="r.comment">{{ r.comment }}</p>
                 </div>
 
-                <button class="view-all-btn" *ngIf="reviews.length > 3" (click)="showAllReviews = !showAllReviews">
+                <button id="mentor-detail-button-90" class="view-all-btn" *ngIf="reviews.length > 3" (click)="showAllReviews = !showAllReviews">
                     {{ showAllReviews ? '▲ Show less' : '▼ View all ' + reviews.length + ' reviews' }}
                 </button>
             </div>

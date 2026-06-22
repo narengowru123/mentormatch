@@ -1,16 +1,16 @@
 <!-- src/app/features/admin/components/reviews/reviews.component.html -->
 
-<div class="reviews-container">
+<div id="reviews-div-1" class="reviews-container">
   <!-- Page Header -->
-  <div class="page-header">
-    <div>
-      <h1 class="page-title">Reviews</h1>
-      <p class="page-subtitle">All ratings and feedback across the platform</p>
+  <div id="reviews-div-2" class="page-header">
+    <div id="reviews-div-3">
+      <h1 id="reviews-h1-4" class="page-title">Reviews</h1>
+      <p id="reviews-p-5" class="page-subtitle">All ratings and feedback across the platform</p>
     </div>
-    <div class="header-actions">
+    <div id="reviews-div-6" class="header-actions">
       <!-- Search Bar -->
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
+      <div id="reviews-div-7" class="search-box">
+        <span id="reviews-span-8" class="search-icon">🔍</span>
         <input 
           id="reviews-search-input"
           type="text" 
@@ -21,39 +21,39 @@
       </div>
       
       <!-- Rating Filter -->
-      <div class="filter-group">
+      <div id="reviews-div-10" class="filter-group">
         <select 
           id="reviews-rating-filter"
           class="rating-filter"
           [(ngModel)]="selectedRating" 
           (change)="onFilterChange()">
-          <option *ngFor="let option of ratingOptions" [value]="option.value">
+          <option [id]="'reviews-option-12-' + optionIndex1" *ngFor="let option of ratingOptions; let optionIndex1 = index" [value]="option.value">
             {{ option.label }}
           </option>
         </select>
       </div>
       
-      <span class="stat-badge">{{ filteredReviews.length }} Reviews</span>
+      <span id="reviews-span-13" class="stat-badge">{{ filteredReviews.length }} Reviews</span>
     </div>
   </div>
 
   <!-- Loading State -->
-  <div *ngIf="loading" class="loading-state">
-    <div class="spinner"></div>
-    <p>Loading reviews...</p>
+  <div id="reviews-div-14" *ngIf="loading" class="loading-state">
+    <div id="reviews-div-15" class="spinner"></div>
+    <p id="reviews-p-16">Loading reviews...</p>
   </div>
 
   <!-- Error State -->
-  <div *ngIf="error && !loading" class="error-state">
-    <p>{{ error }}</p>
-    <button class="retry-btn" (click)="loadReviews()">Retry</button>
+  <div id="reviews-div-17" *ngIf="error && !loading" class="error-state">
+    <p id="reviews-p-18">{{ error }}</p>
+    <button id="reviews-button-19" class="retry-btn" (click)="loadReviews()">Retry</button>
   </div>
 
   <!-- Reviews Grid -->
-  <div *ngIf="!loading && !error" class="reviews-grid">
+  <div id="reviews-div-20" *ngIf="!loading && !error" class="reviews-grid">
     
     <!-- Review Card -->
-    <div *ngFor="let review of filteredReviews" class="review-card">
+    <div [id]="'reviews-div-21-' + reviewIndex2" *ngFor="let review of filteredReviews; let reviewIndex2 = index" class="review-card">
       
       <!-- Delete Button -->
       <button [id]="'delete-review-btn-' + review.sessionId" class="delete-btn" (click)="deleteReview(review)" title="Delete Review">
@@ -61,55 +61,55 @@
       </button>
 
       <!-- Card Header -->
-      <div class="review-header">
-        <div class="reviewer-info">
-          <div class="avatar" 
+      <div [id]="'reviews-div-23-' + reviewIndex2" class="review-header">
+        <div [id]="'reviews-div-24-' + reviewIndex2" class="reviewer-info">
+          <div [id]="'reviews-div-25-' + reviewIndex2" class="avatar" 
                [class.avatar-student]="review.reviewerRole === 'STUDENT'" 
                [class.avatar-mentor]="review.reviewerRole === 'MENTOR'">
             {{ review.reviewerName.charAt(0).toUpperCase() }}
           </div>
-          <div class="user-details">
-            <span class="user-name">{{ review.reviewerName }}</span>
-            <span class="user-role">{{ review.reviewerRole }}</span>
+          <div id="reviews-div-26" class="user-details">
+            <span id="reviews-span-27" class="user-name">{{ review.reviewerName }}</span>
+            <span id="reviews-span-28" class="user-role">{{ review.reviewerRole }}</span>
           </div>
         </div>
-        <div class="review-meta">
-          <div class="stars" [ngClass]="getRatingClass(review.rating)">
-            <span *ngFor="let star of getStars(review.rating)" class="star">{{ star }}</span>
+        <div id="reviews-div-29" class="review-meta">
+          <div id="reviews-div-30" class="stars" [ngClass]="getRatingClass(review.rating)">
+            <span [id]="'reviews-span-31-' + starIndex3" *ngFor="let star of getStars(review.rating); let starIndex3 = index" class="star">{{ star }}</span>
           </div>
-          <span class="review-date">{{ formatDate(review.createdAt) }}</span>
+          <span id="reviews-span-32" class="review-date">{{ formatDate(review.createdAt) }}</span>
         </div>
       </div>
 
       <!-- Reviewed User -->
-      <div class="reviewed-section">
-        <span class="reviewed-label">Reviewed:</span>
-        <span class="reviewed-name">{{ review.revieweeName }}</span>
-        <span class="reviewed-email">({{ review.revieweeEmail }})</span>
+      <div id="reviews-div-33" class="reviewed-section">
+        <span id="reviews-span-34" class="reviewed-label">Reviewed:</span>
+        <span id="reviews-span-35" class="reviewed-name">{{ review.revieweeName }}</span>
+        <span id="reviews-span-36" class="reviewed-email">({{ review.revieweeEmail }})</span>
       </div>
 
       <!-- Comment -->
-      <div class="review-comment" *ngIf="review.comment">
-        <p>{{ review.comment }}</p>
+      <div id="reviews-div-37" class="review-comment" *ngIf="review.comment">
+        <p id="reviews-p-38">{{ review.comment }}</p>
       </div>
-      <div class="review-comment empty" *ngIf="!review.comment">
-        <p class="no-comment">No comment provided</p>
+      <div id="reviews-div-39" class="review-comment empty" *ngIf="!review.comment">
+        <p id="reviews-p-40" class="no-comment">No comment provided</p>
       </div>
 
       <!-- Session Link -->
-      <div class="review-footer">
-        <span class="session-link">Session #{{ review.sessionId }}</span>
+      <div id="reviews-div-41" class="review-footer">
+        <span id="reviews-span-42" class="session-link">Session #{{ review.sessionId }}</span>
       </div>
 
     </div>
 
     <!-- Empty State -->
-    <div *ngIf="filteredReviews.length === 0" class="empty-state">
-      <div class="empty-icon">⭐</div>
-      <h3>No reviews found</h3>
-      <p *ngIf="selectedRating === 'ALL' && !searchQuery">No reviews have been submitted yet.</p>
-      <p *ngIf="selectedRating !== 'ALL'">No {{ selectedRating }}-star reviews found.</p>
-      <p *ngIf="searchQuery">No reviews match your search "{{ searchQuery }}"</p>
+    <div id="reviews-div-43" *ngIf="filteredReviews.length === 0" class="empty-state">
+      <div id="reviews-div-44" class="empty-icon">⭐</div>
+      <h3 id="reviews-h3-45">No reviews found</h3>
+      <p id="reviews-p-46" *ngIf="selectedRating === 'ALL' && !searchQuery">No reviews have been submitted yet.</p>
+      <p id="reviews-p-47" *ngIf="selectedRating !== 'ALL'">No {{ selectedRating }}-star reviews found.</p>
+      <p id="reviews-p-48" *ngIf="searchQuery">No reviews match your search "{{ searchQuery }}"</p>
     </div>
 
   </div>

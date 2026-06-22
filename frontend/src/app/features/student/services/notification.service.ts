@@ -4,8 +4,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Client } from '@stomp/stompjs';
-import SockJS from 'sockjs-client';
 import { NotificationItem } from '../models/notification.model';
 import {environment} from "../../../../environments/environment";
 
@@ -19,7 +17,6 @@ interface ApiResponse<T> {
 export class NotificationService {
 
     private readonly API = `${environment.apiUrl}/api/notifications`;
-    private stompClient: Client | null = null;
 
     // Live streams — components subscribe to these
     private _notifications$ = new BehaviorSubject<NotificationItem[]>([]);
@@ -29,30 +26,6 @@ export class NotificationService {
     readonly unreadCount$ = this._unreadCount$.asObservable();
 
     constructor(private http: HttpClient) {}
-
-    // Call after login
-    connect(userId: number, token: string): void {
-        this.stompClient = new Client({
-            webSocketFactory: () => new SockJS(`${environment.apiUrl}/api/ws`),
-            connectHeaders: { Authorization: `Bearer ${token}` },
-            reconnectDelay: 5000,
-            onConnect: () => {
-                this.stompClient!.subscribe('/user/queue/notifications', (frame) => {
-                    const incoming: NotificationItem = JSON.parse(frame.body);
-                    const current = this._notifications$.getValue();
-                    this._notifications$.next([incoming, ...current]);
-                    this._unreadCount$.next(this._unreadCount$.getValue() + 1);
-                });
-            }
-        });
-        this.stompClient.activate();
-    }
-
-    // Call on logout
-    disconnect(): void {
-        this.stompClient?.deactivate();
-        this.stompClient = null;
-    }
 
     // Load all notifications from REST
     loadAll(): Observable<NotificationItem[]> {

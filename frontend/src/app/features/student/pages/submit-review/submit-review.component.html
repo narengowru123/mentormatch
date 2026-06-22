@@ -1,33 +1,33 @@
 <!-- src/app/features/student/pages/submit-review/submit-review.component.html -->
 
-<app-student-navbar></app-student-navbar>
+<app-student-navbar id="submit-review-app-student-navbar-1"></app-student-navbar>
 
-<div class="review-page">
-    <div class="review-card">
+<div id="submit-review-div-2" class="review-page">
+    <div id="submit-review-div-3" class="review-card">
 
-        <button class="back-btn" (click)="goBack()">← Back to sessions</button>
+        <button id="submit-review-button-4" class="back-btn" (click)="goBack()">← Back to sessions</button>
 
-        <p class="card-label">Leave a review</p>
-        <h2>How was your session?</h2>
-        <p class="sub">Your feedback helps other students find great mentors.</p>
+        <p id="submit-review-p-5" class="card-label">Leave a review</p>
+        <h2 id="submit-review-h2-6">How was your session?</h2>
+        <p id="submit-review-p-7" class="sub">Your feedback helps other students find great mentors.</p>
 
         <!-- Success message -->
-        <div class="banner success" *ngIf="successMsg">
+        <div id="submit-review-div-8" class="banner success" *ngIf="successMsg">
             ✓ {{ successMsg }}
         </div>
 
         <!-- Error message -->
-        <div class="banner error" *ngIf="errorMsg">
+        <div id="submit-review-div-9" class="banner error" *ngIf="errorMsg">
             {{ errorMsg }}
         </div>
 
         <ng-container *ngIf="!successMsg">
 
             <!-- Star rating -->
-            <div class="stars-row">
+            <div id="submit-review-div-10" class="stars-row">
         <span
                 [id]="'star-' + star"
-                *ngFor="let star of stars"
+                *ngFor="let star of stars; let starIndex1 = index"
                 [class]="getStarClass(star)"
                 (click)="setRating(star)"
                 (mouseenter)="hoveredRating = star"
@@ -35,18 +35,18 @@
           ★
         </span>
             </div>
-            <p class="rating-label" *ngIf="selectedRating > 0">
+            <p id="submit-review-p-12" class="rating-label" *ngIf="selectedRating > 0">
                 {{ selectedRating }} / 5
-                <span *ngIf="selectedRating === 5"> — Excellent!</span>
-                <span *ngIf="selectedRating === 4"> — Great!</span>
-                <span *ngIf="selectedRating === 3"> — Good</span>
-                <span *ngIf="selectedRating === 2"> — Fair</span>
-                <span *ngIf="selectedRating === 1"> — Poor</span>
+                <span id="submit-review-span-13" *ngIf="selectedRating === 5"> — Excellent!</span>
+                <span id="submit-review-span-14" *ngIf="selectedRating === 4"> — Great!</span>
+                <span id="submit-review-span-15" *ngIf="selectedRating === 3"> — Good</span>
+                <span id="submit-review-span-16" *ngIf="selectedRating === 2"> — Fair</span>
+                <span id="submit-review-span-17" *ngIf="selectedRating === 1"> — Poor</span>
             </p>
 
             <!-- Comment -->
-            <div class="field">
-                <label for="comment">Comment <span class="optional">(optional)</span></label>
+            <div id="submit-review-div-18" class="field">
+                <label id="submit-review-label-19" for="comment">Comment <span id="submit-review-span-20" class="optional">(optional)</span></label>
                 <textarea id="comment" rows="4"
                           [(ngModel)]="comment"
                           placeholder="Share what you learned, how the mentor helped you...">

@@ -1,56 +1,58 @@
 <!-- src/app/features/admin/components/broadcast/broadcast.component.html -->
 
-<div class="broadcast-container">
+<div id="broadcast-div-1" class="broadcast-container">
   <!-- Page Header -->
-  <div class="page-header">
-    <h1 class="page-title">Broadcast Notifications</h1>
-    <p class="page-subtitle">Send announcements to users across the platform</p>
+  <div id="broadcast-div-2" class="page-header">
+    <h1 id="broadcast-h1-3" class="page-title">Broadcast Notifications</h1>
+    <p id="broadcast-p-4" class="page-subtitle">Send announcements to users across the platform</p>
   </div>
 
   <!-- Broadcast Form Card -->
-  <div class="broadcast-card">
+  <div id="broadcast-div-5" class="broadcast-card">
     
     <!-- Success Message -->
-    <div *ngIf="successMessage" class="alert alert-success">
-      <span class="alert-icon">✅</span>
-      <span>{{ successMessage }}</span>
+    <div id="broadcast-div-6" *ngIf="successMessage" class="alert alert-success">
+      <span id="broadcast-span-7" class="alert-icon">✅</span>
+      <span id="broadcast-span-8">{{ successMessage }}</span>
     </div>
 
     <!-- Error Message -->
-    <div *ngIf="errorMessage" class="alert alert-error">
-      <span class="alert-icon">❌</span>
-      <span>{{ errorMessage }}</span>
+    <div id="broadcast-div-9" *ngIf="errorMessage" class="alert alert-error">
+      <span id="broadcast-span-10" class="alert-icon">❌</span>
+      <span id="broadcast-span-11">{{ errorMessage }}</span>
     </div>
 
-    <form [formGroup]="broadcastForm" (ngSubmit)="onSubmit()">
+    <form id="broadcast-form-12" [formGroup]="broadcastForm" (ngSubmit)="onSubmit()">
       
       <!-- Target Audience -->
-      <div class="form-group">
-        <label class="form-label">Target Audience</label>
-        <div class="audience-options">
+      <div id="broadcast-div-13" class="form-group">
+        <label id="broadcast-label-14" class="form-label">Target Audience</label>
+        <div id="broadcast-div-15" class="audience-options">
           <label 
-            *ngFor="let option of audienceOptions" 
+          [id]="'broadcast-label-16-' + optionIndex1"
+            *ngFor="let option of audienceOptions; let optionIndex1 = index" 
             class="audience-card"
             [class.selected]="targetAudience?.value === option.value">
             <input 
+            [id]="'broadcast-input-17-' + optionIndex1"
               type="radio" 
               formControlName="targetAudience" 
               [value]="option.value"
               class="radio-input">
-            <div class="audience-content">
-              <span class="audience-label">{{ option.label }}</span>
-              <span class="audience-description">{{ option.description }}</span>
+            <div [id]="'broadcast-div-18-' + optionIndex1" class="audience-content">
+              <span [id]="'broadcast-span-19-' + optionIndex1" class="audience-label">{{ option.label }}</span>
+              <span [id]="'broadcast-span-20-' + optionIndex1" class="audience-description">{{ option.description }}</span>
             </div>
-            <span class="check-icon">✓</span>
+            <span [id]="'broadcast-span-21-' + optionIndex1" class="check-icon">✓</span>
           </label>
         </div>
       </div>
 
       <!-- Title -->
-      <div class="form-group">
-        <label class="form-label" for="title">
+      <div id="broadcast-div-22" class="form-group">
+        <label id="broadcast-label-23" class="form-label" for="title">
           Notification Title
-          <span class="char-count">{{ getCharCount('title') }}/100</span>
+          <span id="broadcast-span-24" class="char-count">{{ getCharCount('title') }}/100</span>
         </label>
         <input 
           type="text" 
@@ -59,16 +61,16 @@
           class="form-input"
           [class.invalid]="title?.invalid && title?.touched"
           placeholder="e.g., Platform Maintenance Scheduled">
-        <span *ngIf="title?.invalid && title?.touched" class="error-text">
+        <span id="broadcast-span-26" *ngIf="title?.invalid && title?.touched" class="error-text">
           Title is required (max 100 characters)
         </span>
       </div>
 
       <!-- Message -->
-      <div class="form-group">
-        <label class="form-label" for="message">
+      <div id="broadcast-div-27" class="form-group">
+        <label id="broadcast-label-28" class="form-label" for="message">
           Message
-          <span class="char-count">{{ getCharCount('message') }}/500</span>
+          <span id="broadcast-span-29" class="char-count">{{ getCharCount('message') }}/500</span>
         </label>
         <textarea 
           id="message"
@@ -77,21 +79,21 @@
           [class.invalid]="message?.invalid && message?.touched"
           rows="5"
           placeholder="Write your announcement here..."></textarea>
-        <span *ngIf="message?.invalid && message?.touched" class="error-text">
+        <span id="broadcast-span-31" *ngIf="message?.invalid && message?.touched" class="error-text">
           Message is required (max 500 characters)
         </span>
       </div>
 
       <!-- Submit Button -->
-      <div class="form-actions">
+      <div id="broadcast-div-32" class="form-actions">
         <button 
           id="broadcast-submit-btn"
           type="submit" 
           class="submit-btn"
           [disabled]="loading || broadcastForm.invalid">
-          <span *ngIf="!loading">📢 Send Broadcast</span>
-          <span *ngIf="loading" class="loading-text">
-            <span class="mini-spinner"></span>
+          <span id="broadcast-span-34" *ngIf="!loading">📢 Send Broadcast</span>
+          <span id="broadcast-span-35" *ngIf="loading" class="loading-text">
+            <span id="broadcast-span-36" class="mini-spinner"></span>
             Sending...
           </span>
         </button>
@@ -100,17 +102,17 @@
     </form>
 
     <!-- Preview Card -->
-    <div class="preview-card" *ngIf="title?.value || message?.value">
-      <h4 class="preview-title">Preview</h4>
-      <div class="notification-preview">
-        <div class="preview-header">
-          <span class="preview-icon">🔔</span>
-          <div class="preview-content">
-            <p class="preview-notification-title">{{ title?.value || 'Notification Title' }}</p>
-            <p class="preview-notification-message">{{ message?.value || 'Your message will appear here...' }}</p>
+    <div id="broadcast-div-37" class="preview-card" *ngIf="title?.value || message?.value">
+      <h4 id="broadcast-h4-38" class="preview-title">Preview</h4>
+      <div id="broadcast-div-39" class="notification-preview">
+        <div id="broadcast-div-40" class="preview-header">
+          <span id="broadcast-span-41" class="preview-icon">🔔</span>
+          <div id="broadcast-div-42" class="preview-content">
+            <p id="broadcast-p-43" class="preview-notification-title">{{ title?.value || 'Notification Title' }}</p>
+            <p id="broadcast-p-44" class="preview-notification-message">{{ message?.value || 'Your message will appear here...' }}</p>
           </div>
         </div>
-        <span class="preview-time">Just now</span>
+        <span id="broadcast-span-45" class="preview-time">Just now</span>
       </div>
     </div>
 

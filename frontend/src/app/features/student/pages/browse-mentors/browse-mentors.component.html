@@ -1,118 +1,118 @@
-<app-student-navbar></app-student-navbar>
-<div class="page">
+<app-student-navbar id="browse-mentors-app-student-navbar-1"></app-student-navbar>
+<div id="browse-mentors-div-2" class="page">
 
-    <div class="page-header">
-        <button class="back-btn" type="button" (click)="goback()"  >← Back to dashboard</button>
-        <div>
-            <h1>Browse Mentors</h1>
-            <p class="sub">Find the right mentor for your goals</p>
+    <div id="browse-mentors-div-3" class="page-header">
+        <button id="browse-mentors-button-4" class="back-btn" type="button" (click)="goback()"  >← Back to dashboard</button>
+        <div id="browse-mentors-div-5">
+            <h1 id="browse-mentors-h1-6">Browse Mentors</h1>
+            <p id="browse-mentors-p-7" class="sub">Find the right mentor for your goals</p>
         </div>
     </div>
 
-    <div class="recommended-section" *ngIf="recommended.length > 0">
-        <p class="section-label">Recommended for you</p>
-        <div class="recommended-list">
-            <div class="rec-card" *ngFor="let m of recommended" (click)="viewMentor(m.id)">
-                <div class="rec-avatar">{{ getInitials(m.user.fullName) }}</div>
-                <div class="rec-info">
-                    <p class="rec-name">{{ m.user.fullName }}</p>
-                    <p class="rec-title">{{ m.industry || 'Mentor' }}</p>
-                    <p class="rec-title" *ngIf="m.hourlyRate && m.hourlyRate > 0">₹{{ m.hourlyRate }} / hr</p>
+    <div id="browse-mentors-div-8" class="recommended-section" *ngIf="recommended.length > 0">
+        <p id="browse-mentors-p-9" class="section-label">Recommended for you</p>
+        <div id="browse-mentors-div-10" class="recommended-list">
+            <div [id]="'browse-mentors-div-11-' + mIndex1" class="rec-card" *ngFor="let m of recommended; let mIndex1 = index" (click)="viewMentor(m.id)">
+                <div [id]="'browse-mentors-div-12-' + mIndex1" class="rec-avatar">{{ getInitials(m.user.fullName) }}</div>
+                <div [id]="'browse-mentors-div-13-' + mIndex1" class="rec-info">
+                    <p [id]="'browse-mentors-p-14-' + mIndex1" class="rec-name">{{ m.user.fullName }}</p>
+                    <p [id]="'browse-mentors-p-15-' + mIndex1" class="rec-title">{{ m.industry || 'Mentor' }}</p>
+                    <p [id]="'browse-mentors-p-16-' + mIndex1" class="rec-title" *ngIf="m.hourlyRate && m.hourlyRate > 0">₹{{ m.hourlyRate }} / hr</p>
                 </div>
-                <span class="avail-dot" [class.online]="m.isAvailable"></span>
+                <span [id]="'browse-mentors-span-17-' + mIndex1" class="avail-dot" [class.online]="m.isAvailable"></span>
             </div>
         </div>
     </div>
 
-    <div class="content-row">
+    <div id="browse-mentors-div-18" class="content-row">
 
-        <aside class="filters" [formGroup]="filterForm">
-            <div class="filter-head">
-                <p class="section-label" style="margin:0">Filters
-                    <span class="filter-count" *ngIf="activeFilterCount > 0">{{ activeFilterCount }}</span>
+        <aside id="browse-mentors-aside-19" class="filters" [formGroup]="filterForm">
+            <div id="browse-mentors-div-20" class="filter-head">
+                <p id="browse-mentors-p-21" class="section-label" style="margin:0">Filters
+                    <span id="browse-mentors-span-22" class="filter-count" *ngIf="activeFilterCount > 0">{{ activeFilterCount }}</span>
                 </p>
-                <button class="clear-btn" *ngIf="activeFilterCount > 0" (click)="clearFilters()">Clear all</button>
+                <button id="browse-mentors-button-23" class="clear-btn" *ngIf="activeFilterCount > 0" (click)="clearFilters()">Clear all</button>
             </div>
 
-            <div class="filter-group">
-                <label>Search by skill</label>
+            <div id="browse-mentors-div-24" class="filter-group">
+                <label id="browse-mentors-label-25">Search by skill</label>
             <input id="filter-skill-input" type="text" formControlName="skill" placeholder="e.g. Java, AWS, React" />
             </div>
 
-            <div class="filter-group">
-                <label>Industry</label>
+            <div id="browse-mentors-div-27" class="filter-group">
+                <label id="browse-mentors-label-28">Industry</label>
                 <select id="filter-industry-select" formControlName="industry">
-                    <option value="">All industries</option>
-                    <option *ngFor="let ind of industries" [value]="ind">{{ ind }}</option>
+                    <option id="browse-mentors-option-30" value="">All industries</option>
+                    <option [id]="'browse-mentors-option-31-' + indIndex2" *ngFor="let ind of industries; let indIndex2 = index" [value]="ind">{{ ind }}</option>
                 </select>
             </div>
 
-            <div class="filter-group">
-                <label>Minimum rating</label>
-                <div class="radio-group">
-                    <label class="radio-item" *ngFor="let r of ratings">
-                        <input type="radio" formControlName="minRating" [value]="r.value" />
+            <div id="browse-mentors-div-32" class="filter-group">
+                <label id="browse-mentors-label-33">Minimum rating</label>
+                <div id="browse-mentors-div-34" class="radio-group">
+                    <label [id]="'browse-mentors-label-35-' + rIndex3" class="radio-item" *ngFor="let r of ratings; let rIndex3 = index">
+                        <input [id]="'browse-mentors-input-36-' + rIndex3" type="radio" formControlName="minRating" [value]="r.value" />
                         {{ r.label }}
                     </label>
                 </div>
             </div>
 
-            <div class="filter-group">
-                <label class="checkbox-item">
+            <div id="browse-mentors-div-37" class="filter-group">
+                <label id="browse-mentors-label-38" class="checkbox-item">
                     <input id="filter-available-checkbox" type="checkbox" formControlName="available" />
                     Available mentors only
                 </label>
             </div>
         </aside>
 
-        <div class="mentor-list">
+        <div id="browse-mentors-div-40" class="mentor-list">
 
-            <div class="list-meta" *ngIf="!loading">
+            <div id="browse-mentors-div-41" class="list-meta" *ngIf="!loading">
                 {{ filteredMentors.length }} mentor{{ filteredMentors.length !== 1 ? 's' : '' }} found
             </div>
 
-            <div *ngIf="loading" class="state-msg">Loading mentors…</div>
-            <div *ngIf="errorMsg" class="banner error">{{ errorMsg }}</div>
+            <div id="browse-mentors-div-42" *ngIf="loading" class="state-msg">Loading mentors…</div>
+            <div id="browse-mentors-div-43" *ngIf="errorMsg" class="banner error">{{ errorMsg }}</div>
 
-            <div *ngIf="!loading && filteredMentors.length === 0 && !errorMsg" class="state-msg">
+            <div id="browse-mentors-div-44" *ngIf="!loading && filteredMentors.length === 0 && !errorMsg" class="state-msg">
                 No mentors match your filters.
-                <button class="clear-btn" (click)="clearFilters()">Clear filters</button>
+                <button id="browse-mentors-button-45" class="clear-btn" (click)="clearFilters()">Clear filters</button>
             </div>
 
-            <div class="mentor-card" [id]="'mentor-card-' + mentor.id" *ngFor="let mentor of filteredMentors"
+            <div class="mentor-card" [id]="'mentor-card-' + mentor.id" *ngFor="let mentor of filteredMentors; let mentorIndex4 = index"
                  (click)="viewMentor(mentor.id)">
 
-                <div class="mentor-avatar">
-                    <span>{{ getInitials(mentor.user.fullName) }}</span>
-                    <span class="avail-dot" [class.online]="mentor.isAvailable"></span>
+                <div [id]="'browse-mentors-div-47-' + mentorIndex4" class="mentor-avatar">
+                    <span [id]="'browse-mentors-span-48-' + mentorIndex4">{{ getInitials(mentor.user.fullName) }}</span>
+                    <span [id]="'browse-mentors-span-49-' + mentorIndex4" class="avail-dot" [class.online]="mentor.isAvailable"></span>
                 </div>
 
-                <div class="mentor-info">
-                    <div class="mentor-top">
-                        <div>
-                            <h3>{{ mentor.user.fullName }}</h3>
-                            <p class="mentor-title">{{ mentor.industry || 'Industry not set' }}</p>
-                            <p class="mentor-title" *ngIf="mentor.hourlyRate && mentor.hourlyRate > 0">₹{{ mentor.hourlyRate }} / hour</p>
+                <div id="browse-mentors-div-50" class="mentor-info">
+                    <div id="browse-mentors-div-51" class="mentor-top">
+                        <div id="browse-mentors-div-52">
+                            <h3 id="browse-mentors-h3-53">{{ mentor.user.fullName }}</h3>
+                            <p id="browse-mentors-p-54" class="mentor-title">{{ mentor.industry || 'Industry not set' }}</p>
+                            <p id="browse-mentors-p-55" class="mentor-title" *ngIf="mentor.hourlyRate && mentor.hourlyRate > 0">₹{{ mentor.hourlyRate }} / hour</p>
                         </div>
-                        <div class="mentor-rating">
-                            <span class="stars">{{ getRatingStars(mentor.rating) }}</span>
-                            <span class="rating-val">{{ mentor.rating.toFixed(1) }}</span>
+                        <div id="browse-mentors-div-56" class="mentor-rating">
+                            <span id="browse-mentors-span-57" class="stars">{{ getRatingStars(mentor.rating) }}</span>
+                            <span id="browse-mentors-span-58" class="rating-val">{{ mentor.rating.toFixed(1) }}</span>
                         </div>
                     </div>
 
-                    <p class="mentor-bio" *ngIf="mentor.bio">{{ mentor.bio }}</p>
+                    <p id="browse-mentors-p-59" class="mentor-bio" *ngIf="mentor.bio">{{ mentor.bio }}</p>
 
-                    <div class="mentor-meta">
-                        <span class="meta-badge" *ngIf="mentor.industry">{{ mentor.industry }}</span>
+                    <div id="browse-mentors-div-60" class="mentor-meta">
+                        <span id="browse-mentors-span-61" class="meta-badge" *ngIf="mentor.industry">{{ mentor.industry }}</span>
                     </div>
 
-                    <div class="skills-row" *ngIf="mentor.skills?.length">
-                        <span class="skill-tag" *ngFor="let skill of mentor.skills.slice(0, 5)">{{ skill }}</span>
-                        <span class="skill-more" *ngIf="mentor.skills.length > 5">+{{ mentor.skills.length - 5 }} more</span>
+                    <div id="browse-mentors-div-62" class="skills-row" *ngIf="mentor.skills?.length">
+                        <span [id]="'browse-mentors-span-63-' + skillIndex5" class="skill-tag" *ngFor="let skill of mentor.skills.slice(0, 5); let skillIndex5 = index">{{ skill }}</span>
+                        <span id="browse-mentors-span-64" class="skill-more" *ngIf="mentor.skills.length > 5">+{{ mentor.skills.length - 5 }} more</span>
                     </div>
                 </div>
 
-                <div class="mentor-actions">
+                <div id="browse-mentors-div-65" class="mentor-actions">
                     <button [id]="'view-profile-btn-' + mentor.id" class="btn-book" (click)="$event.stopPropagation(); viewMentor(mentor.id)">
                         View profile
                     </button>

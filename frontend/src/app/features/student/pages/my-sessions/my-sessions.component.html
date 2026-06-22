@@ -1,88 +1,88 @@
-<app-student-navbar></app-student-navbar>
-<div class="page">
+<app-student-navbar id="my-sessions-app-student-navbar-1"></app-student-navbar>
+<div id="my-sessions-div-2" class="page">
 
-    <div class="page-header">
-        <div>
-            <h1>My Sessions</h1>
-            <p class="sub">Track all your mentorship bookings</p>
+    <div id="my-sessions-div-3" class="page-header">
+        <div id="my-sessions-div-4">
+            <h1 id="my-sessions-h1-5">My Sessions</h1>
+            <p id="my-sessions-p-6" class="sub">Track all your mentorship bookings</p>
         </div>
-        <button class="btn-primary" (click)="browseMentors()">+ Book new session</button>
+        <button id="my-sessions-button-7" class="btn-primary" (click)="browseMentors()">+ Book new session</button>
     </div>
 
-    <div *ngIf="loading" class="state-msg">Loading sessions...</div>
-    <div *ngIf="errorMsg" class="banner error">{{ errorMsg }}</div>
+    <div id="my-sessions-div-8" *ngIf="loading" class="state-msg">Loading sessions...</div>
+    <div id="my-sessions-div-9" *ngIf="errorMsg" class="banner error">{{ errorMsg }}</div>
 
     <ng-container *ngIf="!loading && !errorMsg">
 
-        <div class="tabs">
-            <button class="tab-btn"
-                    *ngFor="let tab of tabs"
+        <div id="my-sessions-div-10" class="tabs">
+            <button [id]="'my-sessions-button-11-' + tabIndex1" class="tab-btn"
+                    *ngFor="let tab of tabs; let tabIndex1 = index"
                     [class.active]="activeTab === tab.value"
                     (click)="applyTab(tab.value)">
                 {{ tab.label }}
-                <span class="tab-count" *ngIf="tab.count > 0">{{ tab.count }}</span>
+                <span [id]="'my-sessions-span-12-' + tabIndex1" class="tab-count" *ngIf="tab.count > 0">{{ tab.count }}</span>
             </button>
         </div>
 
-        <div *ngIf="filteredSessions.length === 0" class="empty-state">
-            <p class="empty-icon">📭</p>
-            <p class="empty-title">No {{ activeTab === 'ALL' ? '' : activeTab.toLowerCase() }} sessions yet</p>
-            <p class="empty-sub" *ngIf="activeTab === 'ALL'">Book a session with a mentor to get started.</p>
-            <button class="btn-primary" *ngIf="activeTab === 'ALL'" (click)="browseMentors()">Browse mentors</button>
+        <div id="my-sessions-div-13" *ngIf="filteredSessions.length === 0" class="empty-state">
+            <p id="my-sessions-p-14" class="empty-icon">📭</p>
+            <p id="my-sessions-p-15" class="empty-title">No {{ activeTab === 'ALL' ? '' : activeTab.toLowerCase() }} sessions yet</p>
+            <p id="my-sessions-p-16" class="empty-sub" *ngIf="activeTab === 'ALL'">Book a session with a mentor to get started.</p>
+            <button id="my-sessions-button-17" class="btn-primary" *ngIf="activeTab === 'ALL'" (click)="browseMentors()">Browse mentors</button>
         </div>
 
-        <div class="session-list">
-            <div class="session-card" [id]="'session-card-' + session.id" *ngFor="let session of filteredSessions">
+        <div id="my-sessions-div-18" class="session-list">
+            <div class="session-card" [id]="'session-card-' + session.id" *ngFor="let session of filteredSessions; let sessionIndex2 = index">
 
-                <div class="mentor-avatar">
-                    <span>{{ getInitials(session.mentorName) }}</span>
+                <div [id]="'my-sessions-div-20-' + sessionIndex2" class="mentor-avatar">
+                    <span [id]="'my-sessions-span-21-' + sessionIndex2">{{ getInitials(session.mentorName) }}</span>
                 </div>
 
-                <div class="session-info">
-                    <div class="session-top">
-                        <h3>{{ session.topic }}</h3>
-                        <span class="status-badge" [ngClass]="getStatusClass(session.status)">
+                <div id="my-sessions-div-22" class="session-info">
+                    <div id="my-sessions-div-23" class="session-top">
+                        <h3 id="my-sessions-h3-24">{{ session.topic }}</h3>
+                        <span id="my-sessions-span-25" class="status-badge" [ngClass]="getStatusClass(session.status)">
               {{ session.status }}
             </span>
                     </div>
 
-                    <p class="mentor-name">with <strong>{{ session.mentorName }}</strong></p>
+                    <p id="my-sessions-p-26" class="mentor-name">with <strong id="my-sessions-strong-27">{{ session.mentorName }}</strong></p>
 
-                    <div class="session-meta">
-                        <span class="meta-item">{{ getPlanIcon(session.planType) }} {{ session.planType }}</span>
-                        <span class="meta-dot">·</span>
-                        <span class="meta-item">Booked: {{ formatDate(session.createdAt) }}</span>
+                    <div id="my-sessions-div-28" class="session-meta">
+                        <span id="my-sessions-span-29" class="meta-item">{{ getPlanIcon(session.planType) }} {{ session.planType }}</span>
+                        <span id="my-sessions-span-30" class="meta-dot">·</span>
+                        <span id="my-sessions-span-31" class="meta-item">Booked: {{ formatDate(session.createdAt) }}</span>
                     </div>
 
                     <!-- Scheduled date and time -->
-                    <div class="session-schedule" *ngIf="session.scheduledAt">
-                        📅 <strong>{{ formatDate(session.scheduledAt) }}</strong>
-                        <span *ngIf="session.durationMinutes"> · {{ session.durationMinutes }} mins</span>
+                    <div id="my-sessions-div-32" class="session-schedule" *ngIf="session.scheduledAt">
+                        📅 <strong id="my-sessions-strong-33">{{ formatDate(session.scheduledAt) }}</strong>
+                        <span id="my-sessions-span-34" *ngIf="session.durationMinutes"> · {{ session.durationMinutes }} mins</span>
                     </div>
 
                     <!-- PENDING — waiting message -->
-                    <div class="pending-msg" *ngIf="session.status === 'PENDING'">
+                    <div id="my-sessions-div-35" class="pending-msg" *ngIf="session.status === 'PENDING'">
                         ⏳ Waiting for mentor to accept and add meeting link
                     </div>
 
                     <!-- ACCEPTED — show Join Meeting button -->
-                    <div class="meeting-link-box" *ngIf="session.status === 'ACCEPTED' && session.meetingLink">
-                        🎥 <strong>Session confirmed!</strong>
-                        <a [href]="session.meetingLink" target="_blank" class="join-btn"
+                    <div id="my-sessions-div-36" class="meeting-link-box" *ngIf="session.status === 'ACCEPTED' && session.meetingLink">
+                        🎥 <strong id="my-sessions-strong-37">Session confirmed!</strong>
+                        <a id="my-sessions-a-38" [href]="session.meetingLink" target="_blank" class="join-btn"
                            (click)="$event.stopPropagation()">
                             Join Meeting
                         </a>
                     </div>
 
                     <!-- ACCEPTED but no meeting link yet -->
-                    <div class="pending-msg" *ngIf="session.status === 'ACCEPTED' && !session.meetingLink">
+                    <div id="my-sessions-div-39" class="pending-msg" *ngIf="session.status === 'ACCEPTED' && !session.meetingLink">
                         ✓ Accepted — mentor will add the meeting link soon
                     </div>
 
                     <!-- COMPLETED — show Leave Review button (only if not yet reviewed) -->
-                    <div class="completed-actions" *ngIf="session.status === 'COMPLETED'">
-                        <div class="completed-note">✅ Session completed!</div>
-                        <span class="reviewed-badge" *ngIf="session.reviewed">⭐ Reviewed</span>
+                    <div id="my-sessions-div-40" class="completed-actions" *ngIf="session.status === 'COMPLETED'">
+                        <div id="my-sessions-div-41" class="completed-note">✅ Session completed!</div>
+                        <span id="my-sessions-span-42" class="reviewed-badge" *ngIf="session.reviewed">⭐ Reviewed</span>
                         <button [id]="'leave-review-btn-' + session.id"
                                 class="review-btn"
                                 *ngIf="!session.reviewed"
@@ -92,24 +92,24 @@
                     </div>
 
                     <!-- REJECTED -->
-                    <div class="rejection-note" *ngIf="session.status === 'REJECTED'">
-                        <span class="rej-label">Status:</span> Session was rejected by the mentor.
-                        <span *ngIf="session.cancellationReason" class="reason-text">
-                            <strong>Reason:</strong> {{ session.cancellationReason }}
+                    <div id="my-sessions-div-44" class="rejection-note" *ngIf="session.status === 'REJECTED'">
+                        <span id="my-sessions-span-45" class="rej-label">Status:</span> Session was rejected by the mentor.
+                        <span id="my-sessions-span-46" *ngIf="session.cancellationReason" class="reason-text">
+                            <strong id="my-sessions-strong-47">Reason:</strong> {{ session.cancellationReason }}
                         </span>
                     </div>
 
                     <!-- CANCELLED -->
-                    <div class="rejection-note" *ngIf="session.status === 'CANCELLED'">
-                        <span class="rej-label">Status:</span> Session was cancelled by the mentor.
-                        <span *ngIf="session.cancellationReason" class="reason-text">
-                            <strong>Reason:</strong> {{ session.cancellationReason }}
+                    <div id="my-sessions-div-48" class="rejection-note" *ngIf="session.status === 'CANCELLED'">
+                        <span id="my-sessions-span-49" class="rej-label">Status:</span> Session was cancelled by the mentor.
+                        <span id="my-sessions-span-50" *ngIf="session.cancellationReason" class="reason-text">
+                            <strong id="my-sessions-strong-51">Reason:</strong> {{ session.cancellationReason }}
                         </span>
                     </div>
                 </div>
 
                 <!-- Cancel button — only for PENDING or ACCEPTED -->
-                <div class="card-right">
+                <div id="my-sessions-div-52" class="card-right">
                     <button [id]="'cancel-session-btn-' + session.id"
                             class="cancel-btn"
                             *ngIf="session.status === 'PENDING' || session.status === 'ACCEPTED'"

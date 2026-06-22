@@ -1,19 +1,19 @@
 <!-- src/app/features/student/pages/dashboard/student-dashboard.component.html -->
-<app-student-navbar></app-student-navbar>
-<div class="dashboard">
+<app-student-navbar id="student-dashboard-app-student-navbar-1"></app-student-navbar>
+<div id="student-dashboard-div-2" class="dashboard">
 
-    <div *ngIf="loading" class="state-msg">Loading dashboard…</div>
-    <div *ngIf="errorMsg" class="banner error">{{ errorMsg }}</div>
+    <div id="student-dashboard-div-3" *ngIf="loading" class="state-msg">Loading dashboard…</div>
+    <div id="student-dashboard-div-4" *ngIf="errorMsg" class="banner error">{{ errorMsg }}</div>
 
     <ng-container *ngIf="!loading && !errorMsg">
 
         <!-- Welcome header -->
-        <div class="welcome-banner">
-            <div class="welcome-left">
-                <div class="avatar">{{ initials }}</div>
-                <div>
-                    <h1>{{ greeting }}, {{ firstName }}! 👋</h1>
-                    <p class="sub">Here's your mentorship journey at a glance.</p>
+        <div id="student-dashboard-div-5" class="welcome-banner">
+            <div id="student-dashboard-div-6" class="welcome-left">
+                <div id="student-dashboard-div-7" class="avatar">{{ initials }}</div>
+                <div id="student-dashboard-div-8">
+                    <h1 id="student-dashboard-h1-9">{{ greeting }}, {{ firstName }}! 👋</h1>
+                    <p id="student-dashboard-p-10" class="sub">Here's your mentorship journey at a glance.</p>
                 </div>
             </div>
         <button id="dashboard-book-btn" class="btn-primary" (click)="navigate('/student/mentors')">
@@ -22,58 +22,58 @@
         </div>
 
         <!-- Stats row -->
-        <div class="stats-row">
+        <div id="student-dashboard-div-12" class="stats-row">
             <div id="stat-total-sessions" class="stat-card">
-                <span class="stat-icon">📚</span>
-                <span class="stat-val">{{ stats.totalSessions }}</span>
-                <span class="stat-lbl">Total Sessions</span>
+                <span id="student-dashboard-span-14" class="stat-icon">📚</span>
+                <span id="student-dashboard-span-15" class="stat-val">{{ stats.totalSessions }}</span>
+                <span id="student-dashboard-span-16" class="stat-lbl">Total Sessions</span>
             </div>
             <div id="stat-upcoming" class="stat-card accent-green">
-                <span class="stat-icon">📅</span>
-                <span class="stat-val">{{ stats.upcoming }}</span>
-                <span class="stat-lbl">Upcoming</span>
+                <span id="student-dashboard-span-18" class="stat-icon">📅</span>
+                <span id="student-dashboard-span-19" class="stat-val">{{ stats.upcoming }}</span>
+                <span id="student-dashboard-span-20" class="stat-lbl">Upcoming</span>
             </div>
             <div id="stat-pending" class="stat-card accent-amber">
-                <span class="stat-icon">⏳</span>
-                <span class="stat-val">{{ stats.pending }}</span>
-                <span class="stat-lbl">Pending Requests</span>
+                <span id="student-dashboard-span-22" class="stat-icon">⏳</span>
+                <span id="student-dashboard-span-23" class="stat-val">{{ stats.pending }}</span>
+                <span id="student-dashboard-span-24" class="stat-lbl">Pending Requests</span>
             </div>
             <div id="stat-completed" class="stat-card accent-blue">
-                <span class="stat-icon">✅</span>
-                <span class="stat-val">{{ stats.completed }}</span>
-                <span class="stat-lbl">Completed</span>
+                <span id="student-dashboard-span-26" class="stat-icon">✅</span>
+                <span id="student-dashboard-span-27" class="stat-val">{{ stats.completed }}</span>
+                <span id="student-dashboard-span-28" class="stat-lbl">Completed</span>
             </div>
         </div>
 
         <!-- Main content -->
-        <div class="main-grid">
+        <div id="student-dashboard-div-29" class="main-grid">
 
             <!-- Recent sessions -->
-            <div class="card">
-                <div class="card-head">
-                    <p class="card-label">Recent Sessions</p>
-                    <button class="link-btn" (click)="navigate('/student/sessions')">View all →</button>
+            <div id="student-dashboard-div-30" class="card">
+                <div id="student-dashboard-div-31" class="card-head">
+                    <p id="student-dashboard-p-32" class="card-label">Recent Sessions</p>
+                    <button id="student-dashboard-button-33" class="link-btn" (click)="navigate('/student/sessions')">View all →</button>
                 </div>
 
-                <div *ngIf="recentSessions.length === 0" class="empty-msg">
+                <div id="student-dashboard-div-34" *ngIf="recentSessions.length === 0" class="empty-msg">
                     No sessions yet.
-                    <button class="link-btn" (click)="navigate('/student/mentors')">Browse mentors</button>
+                    <button id="student-dashboard-button-35" class="link-btn" (click)="navigate('/student/mentors')">Browse mentors</button>
                 </div>
 
-                <div class="session-list">
-                    <div class="session-item" *ngFor="let s of recentSessions"
+                <div id="student-dashboard-div-36" class="session-list">
+                    <div [id]="'student-dashboard-div-37-' + sIndex1" class="session-item" *ngFor="let s of recentSessions; let sIndex1 = index"
                          (click)="navigate('/student/sessions')">
-                        <div class="session-avatar">{{ s.mentorName | slice:0:1 }}</div>
-                        <div class="session-body">
-                            <p class="session-topic">{{ s.topic }}</p>
-                            <p class="session-meta">
+                        <div [id]="'student-dashboard-div-38-' + sIndex1" class="session-avatar">{{ s.mentorName | slice:0:1 }}</div>
+                        <div [id]="'student-dashboard-div-39-' + sIndex1" class="session-body">
+                            <p [id]="'student-dashboard-p-40-' + sIndex1" class="session-topic">{{ s.topic }}</p>
+                            <p [id]="'student-dashboard-p-41-' + sIndex1" class="session-meta">
                                 {{ s.mentorName }}
-                                <span *ngIf="s.scheduledAt"> · {{ formatDate(s.scheduledAt) }}</span>
-                                <span *ngIf="s.durationMinutes"> · {{ getDurationLabel(s.durationMinutes) }}</span>
+                                <span [id]="'student-dashboard-span-42-' + sIndex1" *ngIf="s.scheduledAt"> · {{ formatDate(s.scheduledAt) }}</span>
+                                <span [id]="'student-dashboard-span-43-' + sIndex1" *ngIf="s.durationMinutes"> · {{ getDurationLabel(s.durationMinutes) }}</span>
                             </p>
-                            <span class="plan-badge">{{ s.planType }}</span>
+                            <span [id]="'student-dashboard-span-44-' + sIndex1" class="plan-badge">{{ s.planType }}</span>
                             <!-- Show meeting link if session is accepted -->
-                            <a *ngIf="s.status === 'ACCEPTED' && s.meetingLink"
+                            <a [id]="'student-dashboard-a-45-' + sIndex1" *ngIf="s.status === 'ACCEPTED' && s.meetingLink"
                                [href]="s.meetingLink"
                                target="_blank"
                                class="meet-link"
@@ -81,35 +81,35 @@
                                 🎥 Join Meeting
                             </a>
                         </div>
-                        <span class="status-badge" [ngClass]="getStatusClass(s.status)">{{ s.status }}</span>
+                        <span [id]="'student-dashboard-span-46-' + sIndex1" class="status-badge" [ngClass]="getStatusClass(s.status)">{{ s.status }}</span>
                     </div>
                 </div>
             </div>
 
             <!-- Right column -->
-            <div class="right-col">
+            <div id="student-dashboard-div-47" class="right-col">
 
                 <!-- Profile card -->
-                <div class="card profile-card">
-                    <p class="card-label">Your Profile</p>
-                    <div class="profile-row">
-                        <div class="avatar-sm">{{ initials }}</div>
-                        <div>
-                            <p class="profile-name">{{ profile?.fullName }}</p>
-                            <p class="profile-role">{{ profile?.currentRole || 'Role not set' }}</p>
+                <div id="student-dashboard-div-48" class="card profile-card">
+                    <p id="student-dashboard-p-49" class="card-label">Your Profile</p>
+                    <div id="student-dashboard-div-50" class="profile-row">
+                        <div id="student-dashboard-div-51" class="avatar-sm">{{ initials }}</div>
+                        <div id="student-dashboard-div-52">
+                            <p id="student-dashboard-p-53" class="profile-name">{{ profile?.fullName }}</p>
+                            <p id="student-dashboard-p-54" class="profile-role">{{ profile?.currentRole || 'Role not set' }}</p>
                         </div>
                     </div>
-                    <p class="profile-headline">{{ profile?.headline || 'Add a headline to your profile' }}</p>
-                    <div class="tag-row" *ngIf="profile?.interests">
-            <span class="tag" *ngFor="let tag of profile!.interests.split(',').slice(0,4)">
+                    <p id="student-dashboard-p-55" class="profile-headline">{{ profile?.headline || 'Add a headline to your profile' }}</p>
+                    <div id="student-dashboard-div-56" class="tag-row" *ngIf="profile?.interests">
+            <span [id]="'student-dashboard-span-57-' + tagIndex2" class="tag" *ngFor="let tag of profile!.interests.split(',').slice(0,4); let tagIndex2 = index">
               {{ tag.trim() }}
             </span>
                     </div>
-                    <button class="btn-outline" (click)="navigate('/student/profile')">Edit profile</button>
+                    <button id="student-dashboard-button-58" class="btn-outline" (click)="navigate('/student/profile')">Edit profile</button>
                 </div>
 
             </div>
         </div>
     </ng-container>
 </div>
-<app-footer></app-footer>
+<app-footer id="student-dashboard-app-footer-59"></app-footer>

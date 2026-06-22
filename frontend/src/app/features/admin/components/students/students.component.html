@@ -1,16 +1,16 @@
 <!-- src/app/features/admin/components/students/students.component.html -->
 
-<div class="students-container">
+<div id="students-div-1" class="students-container">
   <!-- Page Header -->
-  <div class="page-header">
-    <div>
-      <h1 class="page-title">Students</h1>
-      <p class="page-subtitle">Manage student accounts and access</p>
+  <div id="students-div-2" class="page-header">
+    <div id="students-div-3">
+      <h1 id="students-h1-4" class="page-title">Students</h1>
+      <p id="students-p-5" class="page-subtitle">Manage student accounts and access</p>
     </div>
-    <div class="header-stats">
+    <div id="students-div-6" class="header-stats">
       <!-- ✅ ADDED SEARCH BAR -->
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
+      <div id="students-div-7" class="search-box">
+        <span id="students-span-8" class="search-icon">🔍</span>
         <input 
           id="students-search-input"
           type="text" 
@@ -19,53 +19,54 @@
           [(ngModel)]="searchQuery"
           (input)="onSearchChange()">
       </div>
-      <span class="stat-badge">{{ filteredStudents.length }} Total</span>
+      <span id="students-span-10" class="stat-badge">{{ filteredStudents.length }} Total</span>
     </div>
   </div>
 
   <!-- Loading State -->
-  <div *ngIf="loading" class="loading-state">
-    <div class="spinner"></div>
-    <p>Loading students...</p>
+  <div id="students-div-11" *ngIf="loading" class="loading-state">
+    <div id="students-div-12" class="spinner"></div>
+    <p id="students-p-13">Loading students...</p>
   </div>
 
   <!-- Error State -->
-  <div *ngIf="error && !loading" class="error-state">
-    <p>{{ error }}</p>
-    <button class="retry-btn" (click)="loadStudents()">Retry</button>
+  <div id="students-div-14" *ngIf="error && !loading" class="error-state">
+    <p id="students-p-15">{{ error }}</p>
+    <button id="students-button-16" class="retry-btn" (click)="loadStudents()">Retry</button>
   </div>
 
   <!-- Students Table -->
-  <div *ngIf="!loading && !error" class="table-container">
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Joined</th>
-          <th>Status</th>
-          <th>Actions</th>
+  <div id="students-div-17" *ngIf="!loading && !error" class="table-container">
+    <table id="students-table-18" class="data-table">
+      <thead id="students-thead-19">
+        <tr id="students-tr-20">
+          <th id="students-th-21">Name</th>
+          <th id="students-th-22">Email</th>
+          <th id="students-th-23">Joined</th>
+          <th id="students-th-24">Status</th>
+          <th id="students-th-25">Actions</th>
         </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let student of filteredStudents">
-          <td>
-            <div class="user-cell">
-              <div class="user-avatar">{{ student.fullName.charAt(0).toUpperCase() }}</div>
-              <span class="user-name">{{ student.fullName }}</span>
+      <tbody id="students-tbody-26">
+        <tr [id]="'students-tr-27-' + studentIndex1" *ngFor="let student of filteredStudents; let studentIndex1 = index">
+          <td [id]="'students-td-28-' + studentIndex1">
+            <div [id]="'students-div-29-' + studentIndex1" class="user-cell">
+              <div [id]="'students-div-30-' + studentIndex1" class="user-avatar">{{ student.fullName.charAt(0).toUpperCase() }}</div>
+              <span [id]="'students-span-31-' + studentIndex1" class="user-name">{{ student.fullName }}</span>
             </div>
           </td>
-          <td class="email-cell">{{ student.email }}</td>
-          <td class="date-cell">{{ formatDate(student.createdAt) }}</td>
-          <td>
+          <td [id]="'students-td-32-' + studentIndex1" class="email-cell">{{ student.email }}</td>
+          <td [id]="'students-td-33-' + studentIndex1" class="date-cell">{{ formatDate(student.createdAt) }}</td>
+          <td [id]="'students-td-34-' + studentIndex1">
             <span 
+            [id]="'students-span-35-' + studentIndex1"
               class="status-badge" 
               [class.status-active]="student.isActive"
               [class.status-inactive]="!student.isActive">
               {{ student.isActive ? 'Active' : 'Inactive' }}
             </span>
           </td>
-          <td>
+          <td [id]="'students-td-36-' + studentIndex1">
             <button 
             [id]="'toggle-student-btn-' + student.email"
             class="toggle-btn"
@@ -80,11 +81,11 @@
     </table>
 
     <!-- Empty State -->
-    <div *ngIf="filteredStudents.length === 0" class="empty-state">
-      <div class="empty-icon">👨‍🎓</div>
-      <h3>No students found</h3>
-      <p *ngIf="!searchQuery">There are currently no registered students.</p>
-      <p *ngIf="searchQuery">No students match your search "{{ searchQuery }}"</p>
+    <div id="students-div-38" *ngIf="filteredStudents.length === 0" class="empty-state">
+      <div id="students-div-39" class="empty-icon">👨‍🎓</div>
+      <h3 id="students-h3-40">No students found</h3>
+      <p id="students-p-41" *ngIf="!searchQuery">There are currently no registered students.</p>
+      <p id="students-p-42" *ngIf="searchQuery">No students match your search "{{ searchQuery }}"</p>
     </div>
   </div>
 </div>

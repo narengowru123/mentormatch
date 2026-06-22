@@ -1,23 +1,23 @@
 <!-- src/app/features/student/components/student-navbar/student-navbar.component.html -->
 
-<nav class="navbar">
-    <div class="navbar-inner">
+<nav id="student-navbar-nav-1" class="navbar">
+    <div id="student-navbar-div-2" class="navbar-inner">
 
         <!-- Brand -->
-        <div class="brand" (click)="navigate('/student/dashboard')">
-            <span class="brand-icon">🎓</span>
-            <span class="brand-name">MentorMatch</span>
+        <div id="student-navbar-div-3" class="brand" (click)="navigate('/student/dashboard')">
+            <span id="student-navbar-span-4" class="brand-icon">🎓</span>
+            <span id="student-navbar-span-5" class="brand-name">MentorMatch</span>
         </div>
 
         <!-- Nav links -->
-        <ul class="nav-links">
-            <li *ngFor="let item of navItems">
-                <button class="nav-btn"
+        <ul id="student-navbar-ul-6" class="nav-links">
+            <li [id]="'student-navbar-li-7-' + itemIndex1" *ngFor="let item of navItems; let itemIndex1 = index">
+                <button [id]="'student-navbar-button-8-' + itemIndex1" class="nav-btn"
                         [class.active]="isActive(item.route)"
                         (click)="navigate(item.route)">
-                    <span class="nav-icon">{{ item.icon }}</span>
-                    <span class="nav-label">{{ item.label }}</span>
-                    <span class="notif-badge" *ngIf="item.label === 'Notifications' && unreadCount > 0">
+                    <span [id]="'student-navbar-span-9-' + itemIndex1" class="nav-icon">{{ item.icon }}</span>
+                    <span [id]="'student-navbar-span-10-' + itemIndex1" class="nav-label">{{ item.label }}</span>
+                    <span [id]="'student-navbar-span-11-' + itemIndex1" class="notif-badge" *ngIf="item.label === 'Notifications' && unreadCount > 0">
                         {{ unreadCount > 9 ? '9+' : unreadCount }}
                     </span>
                 </button>
@@ -25,21 +25,21 @@
         </ul>
 
         <!-- Right — user dropdown -->
-        <div class="nav-right">
-            <div class="user-dropdown-wrap">
-                <button class="user-pill-btn" (click)="toggleDropdown()">
-                    <div class="user-avatar">{{ initials }}</div>
-                    <span class="user-name">{{ fullName }}</span>
-                    <span class="chevron" [class.open]="showDropdown">▾</span>
+        <div id="student-navbar-div-12" class="nav-right">
+            <div id="student-navbar-div-13" class="user-dropdown-wrap">
+                <button id="student-navbar-button-14" class="user-pill-btn" (click)="toggleDropdown()">
+                    <div id="student-navbar-div-15" class="user-avatar">{{ initials }}</div>
+                    <span id="student-navbar-span-16" class="user-name">{{ fullName }}</span>
+                    <span id="student-navbar-span-17" class="chevron" [class.open]="showDropdown">▾</span>
                 </button>
-                <div class="dropdown-menu" *ngIf="showDropdown">
-                    <div class="dropdown-header">
-                        <p class="dd-name">{{ fullName }}</p>
-                        <p class="dd-email">{{ email }}</p>
+                <div id="student-navbar-div-18" class="dropdown-menu" *ngIf="showDropdown">
+                    <div id="student-navbar-div-19" class="dropdown-header">
+                        <p id="student-navbar-p-20" class="dd-name">{{ fullName }}</p>
+                        <p id="student-navbar-p-21" class="dd-email">{{ email }}</p>
                     </div>
-                    <hr class="dd-divider" />
-                    <button class="dd-item logout-item" (click)="logout()">
-                        <span>⏻</span> Logout
+                    <hr id="student-navbar-hr-22" class="dd-divider" />
+                    <button id="student-navbar-button-23" class="dd-item logout-item" (click)="logout()">
+                        <span id="student-navbar-span-24">⏻</span> Logout
                     </button>
                 </div>
             </div>
@@ -49,4 +49,4 @@
 </nav>
 
 <!-- Overlay to close dropdown on outside click -->
-<div class="overlay-dismiss" *ngIf="showDropdown" (click)="closeDropdown()"></div>
+<div id="student-navbar-div-25" class="overlay-dismiss" *ngIf="showDropdown" (click)="closeDropdown()"></div>

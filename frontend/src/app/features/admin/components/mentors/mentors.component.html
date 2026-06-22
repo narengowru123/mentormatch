@@ -1,16 +1,16 @@
 <!-- src/app/features/admin/components/mentors/mentors.component.html -->
 
-<div class="mentors-container">
+<div id="mentors-div-1" class="mentors-container">
   <!-- Page Header -->
-  <div class="page-header">
-    <div>
-      <h1 class="page-title">Mentors</h1>
-      <p class="page-subtitle">Manage mentor accounts and availability</p>
+  <div id="mentors-div-2" class="page-header">
+    <div id="mentors-div-3">
+      <h1 id="mentors-h1-4" class="page-title">Mentors</h1>
+      <p id="mentors-p-5" class="page-subtitle">Manage mentor accounts and availability</p>
     </div>
-    <div class="header-stats">
+    <div id="mentors-div-6" class="header-stats">
       <!-- ✅ ADDED SEARCH BAR -->
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
+      <div id="mentors-div-7" class="search-box">
+        <span id="mentors-span-8" class="search-icon">🔍</span>
         <input 
           id="mentors-search-input"
           type="text" 
@@ -19,51 +19,52 @@
           [(ngModel)]="searchQuery"
           (input)="onSearchChange()">
       </div>
-      <span class="stat-badge">{{ filteredMentors.length }} Total</span>
+      <span id="mentors-span-10" class="stat-badge">{{ filteredMentors.length }} Total</span>
 
   <!-- Loading State -->
-  <div *ngIf="loading" class="loading-state">
-    <div class="spinner"></div>
-    <p>Loading mentors...</p>
+  <div id="mentors-div-11" *ngIf="loading" class="loading-state">
+    <div id="mentors-div-12" class="spinner"></div>
+    <p id="mentors-p-13">Loading mentors...</p>
   </div>
 
   <!-- Error State -->
-  <div *ngIf="error && !loading" class="error-state">
-    <p>{{ error }}</p>
-    <button class="retry-btn" (click)="loadMentors()">Retry</button>
+  <div id="mentors-div-14" *ngIf="error && !loading" class="error-state">
+    <p id="mentors-p-15">{{ error }}</p>
+    <button id="mentors-button-16" class="retry-btn" (click)="loadMentors()">Retry</button>
   </div>
 
   <!-- Mentors Table -->
-  <div *ngIf="!loading && !error" class="table-container">
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Joined</th>
-          <th>Status</th>
-          <th>Actions</th>
+  <div id="mentors-div-17" *ngIf="!loading && !error" class="table-container">
+    <table id="mentors-table-18" class="data-table">
+      <thead id="mentors-thead-19">
+        <tr id="mentors-tr-20">
+          <th id="mentors-th-21">Name</th>
+          <th id="mentors-th-22">Email</th>
+          <th id="mentors-th-23">Joined</th>
+          <th id="mentors-th-24">Status</th>
+          <th id="mentors-th-25">Actions</th>
         </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let mentor of filteredMentors">
-          <td>
-            <div class="user-cell">
-              <div class="user-avatar">{{ mentor.fullName.charAt(0).toUpperCase() }}</div>
-              <span class="user-name">{{ mentor.fullName }}</span>
+      <tbody id="mentors-tbody-26">
+        <tr [id]="'mentors-tr-27-' + mentorIndex1" *ngFor="let mentor of filteredMentors; let mentorIndex1 = index">
+          <td [id]="'mentors-td-28-' + mentorIndex1">
+            <div [id]="'mentors-div-29-' + mentorIndex1" class="user-cell">
+              <div [id]="'mentors-div-30-' + mentorIndex1" class="user-avatar">{{ mentor.fullName.charAt(0).toUpperCase() }}</div>
+              <span [id]="'mentors-span-31-' + mentorIndex1" class="user-name">{{ mentor.fullName }}</span>
             </div>
           </td>
-          <td class="email-cell">{{ mentor.email }}</td>
-          <td class="date-cell">{{ formatDate(mentor.createdAt) }}</td>
-          <td>
+          <td [id]="'mentors-td-32-' + mentorIndex1" class="email-cell">{{ mentor.email }}</td>
+          <td [id]="'mentors-td-33-' + mentorIndex1" class="date-cell">{{ formatDate(mentor.createdAt) }}</td>
+          <td [id]="'mentors-td-34-' + mentorIndex1">
             <span 
+            [id]="'mentors-span-35-' + mentorIndex1"
               class="status-badge" 
               [class.status-active]="mentor.isActive"
               [class.status-inactive]="!mentor.isActive">
               {{ mentor.isActive ? 'Active' : 'Inactive' }}
             </span>
           </td>
-          <td>
+          <td [id]="'mentors-td-36-' + mentorIndex1">
             <button 
             [id]="'toggle-mentor-btn-' + mentor.email"
             class="toggle-btn"
@@ -78,11 +79,11 @@
     </table>
 
     <!-- Empty State -->
-    <div *ngIf="filteredMentors.length === 0" class="empty-state">
-      <div class="empty-icon">👨‍🏫</div>
-      <h3>No mentors found</h3>
-      <p *ngIf="!searchQuery">There are currently no registered mentors.</p>
-      <p *ngIf="searchQuery">No mentors match your search "{{ searchQuery }}"</p>
+    <div id="mentors-div-38" *ngIf="filteredMentors.length === 0" class="empty-state">
+      <div id="mentors-div-39" class="empty-icon">👨‍🏫</div>
+      <h3 id="mentors-h3-40">No mentors found</h3>
+      <p id="mentors-p-41" *ngIf="!searchQuery">There are currently no registered mentors.</p>
+      <p id="mentors-p-42" *ngIf="searchQuery">No mentors match your search "{{ searchQuery }}"</p>
     </div>
   </div>
 </div>

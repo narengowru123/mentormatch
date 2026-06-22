@@ -1,32 +1,32 @@
 <!-- src/app/features/student/mentor-reviews/mentor-reviews.component.html -->
-<app-student-navbar></app-student-navbar>
-<div class="reviews-section">
+<app-student-navbar id="mentor-reviews-app-student-navbar-1"></app-student-navbar>
+<div id="mentor-reviews-div-2" class="reviews-section">
 
-    <div *ngIf="loading" class="state-msg">Loading reviews…</div>
+    <div id="mentor-reviews-div-3" *ngIf="loading" class="state-msg">Loading reviews…</div>
 
     <ng-container *ngIf="!loading">
 
         <!-- Summary -->
-        <div class="summary-row" *ngIf="reviews.length > 0">
-            <span class="avg-num">{{ avgRating.toFixed(1) }}</span>
-            <span class="stars-display">{{ getStars(avgRating) }}</span>
-            <span class="total-count">{{ reviews.length }} review{{ reviews.length !== 1 ? 's' : '' }}</span>
+        <div id="mentor-reviews-div-4" class="summary-row" *ngIf="reviews.length > 0">
+            <span id="mentor-reviews-span-5" class="avg-num">{{ avgRating.toFixed(1) }}</span>
+            <span id="mentor-reviews-span-6" class="stars-display">{{ getStars(avgRating) }}</span>
+            <span id="mentor-reviews-span-7" class="total-count">{{ reviews.length }} review{{ reviews.length !== 1 ? 's' : '' }}</span>
         </div>
 
         <!-- Empty -->
-        <div *ngIf="reviews.length === 0" class="state-msg">No reviews yet.</div>
+        <div id="mentor-reviews-div-8" *ngIf="reviews.length === 0" class="state-msg">No reviews yet.</div>
 
         <!-- Review cards -->
-        <div class="review-item" *ngFor="let r of reviews">
-            <div class="review-header">
-                <div class="reviewer-avatar">{{ getInitials(r.reviewerName) }}</div>
-                <div class="reviewer-info">
-                    <span class="reviewer-name">{{ r.reviewerName }}</span>
-                    <span class="review-date">{{ formatDate(r.createdAt) }}</span>
+        <div [id]="'mentor-reviews-div-9-' + rIndex1" class="review-item" *ngFor="let r of reviews; let rIndex1 = index">
+            <div [id]="'mentor-reviews-div-10-' + rIndex1" class="review-header">
+                <div [id]="'mentor-reviews-div-11-' + rIndex1" class="reviewer-avatar">{{ getInitials(r.reviewerName) }}</div>
+                <div [id]="'mentor-reviews-div-12-' + rIndex1" class="reviewer-info">
+                    <span [id]="'mentor-reviews-span-13-' + rIndex1" class="reviewer-name">{{ r.reviewerName }}</span>
+                    <span [id]="'mentor-reviews-span-14-' + rIndex1" class="review-date">{{ formatDate(r.createdAt) }}</span>
                 </div>
-                <span class="stars-display small">{{ getStars(r.rating) }}</span>
+                <span [id]="'mentor-reviews-span-15-' + rIndex1" class="stars-display small">{{ getStars(r.rating) }}</span>
             </div>
-            <p class="review-comment" *ngIf="r.comment">{{ r.comment }}</p>
+            <p [id]="'mentor-reviews-p-16-' + rIndex1" class="review-comment" *ngIf="r.comment">{{ r.comment }}</p>
         </div>
 
     </ng-container>

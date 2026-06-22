@@ -1,15 +1,15 @@
-<div class="auth-container">
-  <div class="auth-card">
+<div id="login-div-1" class="auth-container">
+  <div id="login-div-2" class="auth-card">
 
-    <div class="auth-header">
-      <h1 class="brand">MentorMatch</h1>
-      <p class="subtitle">Sign in to your account</p>
+    <div id="login-div-3" class="auth-header">
+      <h1 id="login-h1-4" class="brand">MentorMatch</h1>
+      <p id="login-p-5" class="subtitle">Sign in to your account</p>
     </div>
 
     <form id="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
 
-      <div class="form-group">
-        <label for="email">Email</label>
+      <div id="login-div-7" class="form-group">
+        <label id="login-label-8" for="email">Email</label>
         <input
           id="email"
           type="email"
@@ -17,14 +17,14 @@
           placeholder="you@example.com"
           [class.input-error]="email?.invalid && email?.touched"
         />
-        <span class="error-text" *ngIf="email?.invalid && email?.touched">
-          <span *ngIf="email?.errors?.['required']">Email is required</span>
-          <span *ngIf="email?.errors?.['email']">Enter a valid email</span>
+        <span id="login-span-10" class="error-text" *ngIf="email?.invalid && email?.touched">
+          <span id="login-span-11" *ngIf="email?.errors?.['required']">Email is required</span>
+          <span id="login-span-12" *ngIf="email?.errors?.['email']">Enter a valid email</span>
         </span>
       </div>
 
-      <div class="form-group">
-        <label for="password">Password</label>
+      <div id="login-div-13" class="form-group">
+        <label id="login-label-14" for="password">Password</label>
         <input
           id="password"
           type="password"
@@ -32,9 +32,9 @@
           placeholder="Enter your password"
           [class.input-error]="password?.invalid && password?.touched"
         />
-        <span class="error-text" *ngIf="password?.invalid && password?.touched">
-          <span *ngIf="password?.errors?.['required']">Password is required</span>
-          <span *ngIf="password?.errors?.['minlength']">Minimum 6 characters</span>
+        <span id="login-span-16" class="error-text" *ngIf="password?.invalid && password?.touched">
+          <span id="login-span-17" *ngIf="password?.errors?.['required']">Password is required</span>
+          <span id="login-span-18" *ngIf="password?.errors?.['minlength']">Minimum 6 characters</span>
         </span>
       </div>
 
@@ -48,9 +48,9 @@
 
     </form>
 
-    <p class="auth-footer">
+    <p id="login-p-21" class="auth-footer">
       Don't have an account?
-      <a routerLink="/auth/register">Register here</a>
+      <a id="login-a-22" routerLink="/auth/register">Register here</a>
     </p>
 
   </div>

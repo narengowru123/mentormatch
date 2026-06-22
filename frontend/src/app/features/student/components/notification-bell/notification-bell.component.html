@@ -1,35 +1,35 @@
 <!-- src/app/shared/notification-bell/notification-bell.component.html -->
-<app-student-navbar></app-student-navbar>
-<div class="bell-wrap">
+<app-student-navbar id="notification-bell-app-student-navbar-1"></app-student-navbar>
+<div id="notification-bell-div-2" class="bell-wrap">
 
-    <button class="bell-btn" (click)="togglePanel()" title="Notifications">
+    <button id="notification-bell-button-3" class="bell-btn" (click)="togglePanel()" title="Notifications">
         🔔
-        <span class="badge" *ngIf="unreadCount > 0">{{ unreadCount > 99 ? '99+' : unreadCount }}</span>
+        <span id="notification-bell-span-4" class="badge" *ngIf="unreadCount > 0">{{ unreadCount > 99 ? '99+' : unreadCount }}</span>
     </button>
 
-    <div class="panel" *ngIf="panelOpen">
+    <div id="notification-bell-div-5" class="panel" *ngIf="panelOpen">
 
-        <div class="panel-head">
-            <span class="panel-title">Notifications</span>
-            <button class="clear-btn" *ngIf="unreadCount > 0" (click)="markAllRead()">
+        <div id="notification-bell-div-6" class="panel-head">
+            <span id="notification-bell-span-7" class="panel-title">Notifications</span>
+            <button id="notification-bell-button-8" class="clear-btn" *ngIf="unreadCount > 0" (click)="markAllRead()">
                 Mark all read
             </button>
         </div>
 
-        <div *ngIf="notifications.length === 0" class="empty-panel">
+        <div id="notification-bell-div-9" *ngIf="notifications.length === 0" class="empty-panel">
             No notifications yet.
         </div>
 
-        <ul class="notif-list">
-            <li *ngFor="let n of notifications"
+        <ul id="notification-bell-ul-10" class="notif-list">
+            <li [id]="'notification-bell-li-11-' + nIndex1" *ngFor="let n of notifications; let nIndex1 = index"
                 class="notif-item"
                 [class.unread]="!n.isRead"
                 (click)="onClickNotification(n)">
-                <div class="notif-dot" *ngIf="!n.isRead"></div>
-                <div class="notif-body">
-                    <span class="notif-title">{{ n.title }}</span>
-                    <span class="notif-msg">{{ n.message }}</span>
-                    <span class="notif-time">{{ timeAgo(n.createdAt) }}</span>
+                <div [id]="'notification-bell-div-12-' + nIndex1" class="notif-dot" *ngIf="!n.isRead"></div>
+                <div [id]="'notification-bell-div-13-' + nIndex1" class="notif-body">
+                    <span [id]="'notification-bell-span-14-' + nIndex1" class="notif-title">{{ n.title }}</span>
+                    <span [id]="'notification-bell-span-15-' + nIndex1" class="notif-msg">{{ n.message }}</span>
+                    <span [id]="'notification-bell-span-16-' + nIndex1" class="notif-time">{{ timeAgo(n.createdAt) }}</span>
                 </div>
             </li>
         </ul>

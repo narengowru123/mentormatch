@@ -53,7 +53,6 @@ public class SecurityConfig {
                         .requestMatchers("/api/mentors").permitAll()
                         .requestMatchers("/api/mentors/**").permitAll()
                         .requestMatchers("/api/reviews/mentors/**").permitAll()
-                        .requestMatchers("/ws/**").permitAll()
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/v3/api-docs/**").permitAll()
                         // Everything else requires a valid JWT

@@ -1,88 +1,88 @@
 <!-- src/app/features/admin/components/overview/overview.component.html -->
 
-<div class="overview-container">
+<div id="overview-div-1" class="overview-container">
   <!-- Page Header -->
-  <div class="page-header">
-    <h1 class="page-title">Overview</h1>
-    <p class="page-subtitle">Platform statistics and metrics at a glance</p>
+  <div id="overview-div-2" class="page-header">
+    <h1 id="overview-h1-3" class="page-title">Overview</h1>
+    <p id="overview-p-4" class="page-subtitle">Platform statistics and metrics at a glance</p>
   </div>
 
   <!-- Loading State -->
-  <div *ngIf="loading" class="loading-state">
-    <div class="spinner"></div>
-    <p>Loading statistics...</p>
+  <div id="overview-div-5" *ngIf="loading" class="loading-state">
+    <div id="overview-div-6" class="spinner"></div>
+    <p id="overview-p-7">Loading statistics...</p>
   </div>
 
   <!-- Error State -->
-  <div *ngIf="error && !loading" class="error-state">
-    <p>{{ error }}</p>
-    <button class="retry-btn" (click)="loadData()">Retry</button>
+  <div id="overview-div-8" *ngIf="error && !loading" class="error-state">
+    <p id="overview-p-9">{{ error }}</p>
+    <button id="overview-button-10" class="retry-btn" (click)="loadData()">Retry</button>
   </div>
 
   <!-- Content -->
-  <div *ngIf="stats && !loading" class="content-wrapper">
+  <div id="overview-div-11" *ngIf="stats && !loading" class="content-wrapper">
     
     <!-- Stat Cards -->
-    <div class="stats-grid">
-      <app-stat-card label="Total Users" [value]="stats.totalUsers" icon="👥" color="blue"></app-stat-card>
-      <app-stat-card label="Total Mentors" [value]="stats.totalMentors" icon="👨‍🏫" color="purple"></app-stat-card>
-      <app-stat-card label="Total Students" [value]="stats.totalStudents" icon="👨‍🎓" color="green"></app-stat-card>
-      <app-stat-card label="Total Sessions" [value]="stats.totalSessions" icon="📅" color="orange"></app-stat-card>
-      <app-stat-card label="Completed" [value]="stats.completedSessions" icon="✅" color="green"></app-stat-card>
-      <app-stat-card label="Pending" [value]="stats.pendingSessions" icon="⏳" color="orange"></app-stat-card>
+    <div id="overview-div-12" class="stats-grid">
+      <app-stat-card id="overview-app-stat-card-13" label="Total Users" [value]="stats.totalUsers" icon="👥" color="blue"></app-stat-card>
+      <app-stat-card id="overview-app-stat-card-14" label="Total Mentors" [value]="stats.totalMentors" icon="👨‍🏫" color="purple"></app-stat-card>
+      <app-stat-card id="overview-app-stat-card-15" label="Total Students" [value]="stats.totalStudents" icon="👨‍🎓" color="green"></app-stat-card>
+      <app-stat-card id="overview-app-stat-card-16" label="Total Sessions" [value]="stats.totalSessions" icon="📅" color="orange"></app-stat-card>
+      <app-stat-card id="overview-app-stat-card-17" label="Completed" [value]="stats.completedSessions" icon="✅" color="green"></app-stat-card>
+      <app-stat-card id="overview-app-stat-card-18" label="Pending" [value]="stats.pendingSessions" icon="⏳" color="orange"></app-stat-card>
     </div>
 
     <!-- Charts Section -->
-    <div class="charts-section">
+    <div id="overview-div-19" class="charts-section">
       
       <!-- User Distribution Chart -->
-      <div class="chart-card">
-        <div class="chart-header">
-          <h3 class="chart-title">User Distribution</h3>
-          <p class="chart-subtitle">Students vs Mentors breakdown</p>
+      <div id="overview-div-20" class="chart-card">
+        <div id="overview-div-21" class="chart-header">
+          <h3 id="overview-h3-22" class="chart-title">User Distribution</h3>
+          <p id="overview-p-23" class="chart-subtitle">Students vs Mentors breakdown</p>
         </div>
-        <div class="chart-body">
-          <canvas #usersPieChart></canvas>
+        <div id="overview-div-24" class="chart-body">
+          <canvas id="overview-canvas-25" #usersPieChart></canvas>
         </div>
       </div>
 
       <!-- Sessions Overview Chart -->
-      <div class="chart-card">
-        <div class="chart-header">
-          <h3 class="chart-title">Sessions Overview</h3>
-          <p class="chart-subtitle">Total, Completed, and Pending sessions</p>
+      <div id="overview-div-26" class="chart-card">
+        <div id="overview-div-27" class="chart-header">
+          <h3 id="overview-h3-28" class="chart-title">Sessions Overview</h3>
+          <p id="overview-p-29" class="chart-subtitle">Total, Completed, and Pending sessions</p>
         </div>
-        <div class="chart-body">
-          <canvas #sessionsBarChart></canvas>
+        <div id="overview-div-30" class="chart-body">
+          <canvas id="overview-canvas-31" #sessionsBarChart></canvas>
         </div>
       </div>
 
     </div>
 
     <!-- Data Tables Section -->
-    <div class="tables-section">
+    <div id="overview-div-32" class="tables-section">
       
       <!-- Top 5 Mentors Leaderboard -->
-      <div class="data-card">
-        <div class="data-header">
-          <h3 class="data-title">🏆 Top Mentors by Rating</h3>
-          <p class="data-subtitle">Highest rated mentors on the platform</p>
+      <div id="overview-div-33" class="data-card">
+        <div id="overview-div-34" class="data-header">
+          <h3 id="overview-h3-35" class="data-title">🏆 Top Mentors by Rating</h3>
+          <p id="overview-p-36" class="data-subtitle">Highest rated mentors on the platform</p>
         </div>
-        <div class="data-body">
-          <div *ngIf="topMentors.length === 0" class="empty-message">
+        <div id="overview-div-37" class="data-body">
+          <div id="overview-div-38" *ngIf="topMentors.length === 0" class="empty-message">
             No mentors available yet
           </div>
-          <div *ngIf="topMentors.length > 0" class="leaderboard">
-            <div *ngFor="let mentor of topMentors; let i = index" class="leaderboard-item">
-              <div class="rank-badge" [class.rank-1]="i === 0" [class.rank-2]="i === 1" [class.rank-3]="i === 2">
+          <div id="overview-div-39" *ngIf="topMentors.length > 0" class="leaderboard">
+            <div [id]="'overview-div-40-' + i" *ngFor="let mentor of topMentors; let i = index" class="leaderboard-item">
+              <div [id]="'overview-div-41-' + i" class="rank-badge" [class.rank-1]="i === 0" [class.rank-2]="i === 1" [class.rank-3]="i === 2">
                 {{ i + 1 }}
               </div>
-              <div class="mentor-avatar">{{ mentor.fullName.charAt(0).toUpperCase() }}</div>
-              <div class="mentor-info">
-                <span class="mentor-name">{{ mentor.fullName }}</span>
-                <span class="mentor-email">{{ mentor.email }}</span>
+              <div [id]="'overview-div-42-' + i" class="mentor-avatar">{{ mentor.fullName.charAt(0).toUpperCase() }}</div>
+              <div [id]="'overview-div-43-' + i" class="mentor-info">
+                <span [id]="'overview-span-44-' + i" class="mentor-name">{{ mentor.fullName }}</span>
+                <span [id]="'overview-span-45-' + i" class="mentor-email">{{ mentor.email }}</span>
               </div>
-              <div class="rating-badge">
+              <div [id]="'overview-div-46-' + i" class="rating-badge">
                 ⭐ {{ mentor.rating?.toFixed(1) || '0.0' }}
               </div>
             </div>
@@ -91,29 +91,29 @@
       </div>
 
       <!-- Recent Sessions Table -->
-      <div class="data-card">
-        <div class="data-header">
-          <h3 class="data-title">📅 Recent Activity</h3>
-          <p class="data-subtitle">Last 5 sessions created</p>
+      <div id="overview-div-47" class="data-card">
+        <div id="overview-div-48" class="data-header">
+          <h3 id="overview-h3-49" class="data-title">📅 Recent Activity</h3>
+          <p id="overview-p-50" class="data-subtitle">Last 5 sessions created</p>
         </div>
-        <div class="data-body">
-          <div *ngIf="recentSessions.length === 0" class="empty-message">
+        <div id="overview-div-51" class="data-body">
+          <div id="overview-div-52" *ngIf="recentSessions.length === 0" class="empty-message">
             No recent sessions
           </div>
-          <div *ngIf="recentSessions.length > 0" class="activity-list">
-            <div *ngFor="let session of recentSessions" class="activity-item">
-              <div class="activity-icon">📌</div>
-              <div class="activity-content">
-                <p class="activity-title">{{ session.topic }}</p>
-                <p class="activity-subtitle">
+          <div id="overview-div-53" *ngIf="recentSessions.length > 0" class="activity-list">
+            <div [id]="'overview-div-54-' + sessionIndex2" *ngFor="let session of recentSessions; let sessionIndex2 = index" class="activity-item">
+              <div [id]="'overview-div-55-' + sessionIndex2" class="activity-icon">📌</div>
+              <div [id]="'overview-div-56-' + sessionIndex2" class="activity-content">
+                <p [id]="'overview-p-57-' + sessionIndex2" class="activity-title">{{ session.topic }}</p>
+                <p [id]="'overview-p-58-' + sessionIndex2" class="activity-subtitle">
                   {{ session.studentName }} → {{ session.mentorName }}
                 </p>
               </div>
-              <div class="activity-meta">
-                <span class="status-badge" [ngClass]="getStatusClass(session.status)">
+              <div [id]="'overview-div-59-' + sessionIndex2" class="activity-meta">
+                <span [id]="'overview-span-60-' + sessionIndex2" class="status-badge" [ngClass]="getStatusClass(session.status)">
                   {{ session.status }}
                 </span>
-                <span class="activity-time">{{ formatDate(session.createdAt) }}</span>
+                <span [id]="'overview-span-61-' + sessionIndex2" class="activity-time">{{ formatDate(session.createdAt) }}</span>
               </div>
             </div>
           </div>

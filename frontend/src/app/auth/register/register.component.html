@@ -1,15 +1,15 @@
-<div class="auth-container">
-  <div class="auth-card">
+<div id="register-div-1" class="auth-container">
+  <div id="register-div-2" class="auth-card">
 
-    <div class="auth-header">
-      <h1 class="brand">MentorMatch</h1>
-      <p class="subtitle">Create your account</p>
+    <div id="register-div-3" class="auth-header">
+      <h1 id="register-h1-4" class="brand">MentorMatch</h1>
+      <p id="register-p-5" class="subtitle">Create your account</p>
     </div>
 
     <form id="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
 
-      <div class="form-group">
-        <label for="fullName">Full Name</label>
+      <div id="register-div-7" class="form-group">
+        <label id="register-label-8" for="fullName">Full Name</label>
         <input
           id="fullName"
           type="text"
@@ -17,14 +17,14 @@
           placeholder="Enter your name"
           [class.input-error]="fullName?.invalid && fullName?.touched"
         />
-        <span class="error-text" *ngIf="fullName?.invalid && fullName?.touched">
-          <span *ngIf="fullName?.errors?.['required']">Full name is required</span>
-          <span *ngIf="fullName?.errors?.['minlength']">Minimum 2 characters</span>
+        <span id="register-span-10" class="error-text" *ngIf="fullName?.invalid && fullName?.touched">
+          <span id="register-span-11" *ngIf="fullName?.errors?.['required']">Full name is required</span>
+          <span id="register-span-12" *ngIf="fullName?.errors?.['minlength']">Minimum 2 characters</span>
         </span>
       </div>
 
-      <div class="form-group">
-        <label for="email">Email</label>
+      <div id="register-div-13" class="form-group">
+        <label id="register-label-14" for="email">Email</label>
         <input
           id="email"
           type="email"
@@ -32,14 +32,14 @@
           placeholder="you@example.com"
           [class.input-error]="email?.invalid && email?.touched"
         />
-        <span class="error-text" *ngIf="email?.invalid && email?.touched">
-          <span *ngIf="email?.errors?.['required']">Email is required</span>
-          <span *ngIf="email?.errors?.['email']">Enter a valid email</span>
+        <span id="register-span-16" class="error-text" *ngIf="email?.invalid && email?.touched">
+          <span id="register-span-17" *ngIf="email?.errors?.['required']">Email is required</span>
+          <span id="register-span-18" *ngIf="email?.errors?.['email']">Enter a valid email</span>
         </span>
       </div>
 
-      <div class="form-group">
-        <label for="password">Password</label>
+      <div id="register-div-19" class="form-group">
+        <label id="register-label-20" for="password">Password</label>
         <input
           id="password"
           type="password"
@@ -47,24 +47,24 @@
           placeholder="Minimum 6 characters"
           [class.input-error]="password?.invalid && password?.touched"
         />
-        <span class="error-text" *ngIf="password?.invalid && password?.touched">
-          <span *ngIf="password?.errors?.['required']">Password is required</span>
-          <span *ngIf="password?.errors?.['minlength']">Minimum 6 characters</span>
+        <span id="register-span-22" class="error-text" *ngIf="password?.invalid && password?.touched">
+          <span id="register-span-23" *ngIf="password?.errors?.['required']">Password is required</span>
+          <span id="register-span-24" *ngIf="password?.errors?.['minlength']">Minimum 6 characters</span>
         </span>
       </div>
 
-      <div class="form-group">
-        <label for="role">I am a</label>
+      <div id="register-div-25" class="form-group">
+        <label id="register-label-26" for="role">I am a</label>
         <select
           id="role"
           formControlName="role"
           [class.input-error]="role?.invalid && role?.touched"
         >
-          <option value="">Select your role</option>
-          <option value="STUDENT">Student</option>
-          <option value="MENTOR">Mentor</option>
+          <option id="register-option-28" value="">Select your role</option>
+          <option id="register-option-29" value="STUDENT">Student</option>
+          <option id="register-option-30" value="MENTOR">Mentor</option>
         </select>
-        <span class="error-text" *ngIf="role?.invalid && role?.touched">
+        <span id="register-span-31" class="error-text" *ngIf="role?.invalid && role?.touched">
           Role is required
         </span>
       </div>
@@ -83,9 +83,9 @@
 
     </form>
 
-    <p class="auth-footer">
+    <p id="register-p-35" class="auth-footer">
       Already have an account?
-      <a routerLink="/auth/login">Sign in</a>
+      <a id="register-a-36" routerLink="/auth/login">Sign in</a>
     </p>
 
   </div>

@@ -6,7 +6,6 @@ import com.mentormatch.app.entity.User;
 import com.mentormatch.app.repository.NotificationRepository;
 import com.mentormatch.app.repository.UserRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,14 +16,11 @@ public class NotificationService {
 
     private final NotificationRepository notificationRepository;
     private final UserRepository userRepository;
-    private final SimpMessagingTemplate messagingTemplate;
 
     public NotificationService(NotificationRepository notificationRepository,
-                               UserRepository userRepository,
-                               SimpMessagingTemplate messagingTemplate) {
+                               UserRepository userRepository) {
         this.notificationRepository = notificationRepository;
         this.userRepository = userRepository;
-        this.messagingTemplate = messagingTemplate;
     }
 
     // Called by other services to send a notification
@@ -34,14 +30,7 @@ public class NotificationService {
                 .orElseThrow(() -> new RuntimeException("User not found: " + userId));
 
         Notification notification = new Notification(user, title, message, link);
-        Notification saved = notificationRepository.save(notification);
-
-        // Push to the user in real time via WebSocket
-        messagingTemplate.convertAndSendToUser(
-                String.valueOf(userId),
-                "/queue/notifications",
-                toResponse(saved)
-        );
+        notificationRepository.save(notification);
     }
 
     // GET all notifications for the logged-in user

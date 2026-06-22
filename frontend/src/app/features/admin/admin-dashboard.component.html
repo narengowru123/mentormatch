@@ -1,35 +1,36 @@
 <!-- src/app/features/admin/admin-dashboard.component.html -->
 
-<div class="admin-container">
+<div id="admin-dashboard-div-1" class="admin-container">
   <!-- Sidebar -->
-  <aside class="sidebar">
+  <aside id="admin-dashboard-aside-2" class="sidebar">
     <!-- Logo/Brand -->
-    <div class="sidebar-header">
-      <h2 class="brand">MentorMatch</h2>
-      <span class="admin-badge">Admin</span>
+    <div id="admin-dashboard-div-3" class="sidebar-header">
+      <h2 id="admin-dashboard-h2-4" class="brand">MentorMatch</h2>
+      <span id="admin-dashboard-span-5" class="admin-badge">Admin</span>
     </div>
 
     <!-- Navigation Menu -->
-    <nav class="sidebar-nav">
+    <nav id="admin-dashboard-nav-6" class="sidebar-nav">
       <a 
-        *ngFor="let item of menuItems" 
+      [id]="'admin-dashboard-a-7-' + itemIndex1"
+        *ngFor="let item of menuItems; let itemIndex1 = index" 
         [routerLink]="item.route"
         routerLinkActive="active"
         class="nav-item">
-        <span class="nav-icon">{{ item.icon }}</span>
-        <span class="nav-label">{{ item.label }}</span>
+        <span [id]="'admin-dashboard-span-8-' + itemIndex1" class="nav-icon">{{ item.icon }}</span>
+        <span [id]="'admin-dashboard-span-9-' + itemIndex1" class="nav-label">{{ item.label }}</span>
       </a>
     </nav>
 
     <!-- Logout Button -->
-    <button class="logout-btn" (click)="logout()">
-      <span class="nav-icon">🚪</span>
-      <span class="nav-label">Logout</span>
+    <button id="admin-dashboard-button-10" class="logout-btn" (click)="logout()">
+      <span id="admin-dashboard-span-11" class="nav-icon">🚪</span>
+      <span id="admin-dashboard-span-12" class="nav-label">Logout</span>
     </button>
   </aside>
 
   <!-- Main Content -->
-  <main class="main-content">
-    <router-outlet></router-outlet>
+  <main id="admin-dashboard-main-13" class="main-content">
+    <router-outlet id="admin-dashboard-router-outlet-14"></router-outlet>
   </main>
 </div>

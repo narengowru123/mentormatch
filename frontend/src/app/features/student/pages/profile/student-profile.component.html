@@ -1,15 +1,15 @@
-<app-student-navbar></app-student-navbar>
-<div class="profile-page">
+<app-student-navbar id="student-profile-app-student-navbar-1"></app-student-navbar>
+<div id="student-profile-div-2" class="profile-page">
 
-    <div *ngIf="loading" class="state-msg">Loading profile…</div>
+    <div id="student-profile-div-3" *ngIf="loading" class="state-msg">Loading profile…</div>
 
     <ng-container *ngIf="!loading">
-        <button class="back-btn" type="button" (click)="goToDashboard()" >← Back to dashboard</button>
-        <div class="page-header">
-            <div class="avatar">{{ initials }}</div>
-            <div class="header-text">
-                <h2>{{ profile.fullName }}</h2>
-                <span class="email">{{ profile.email }}</span>
+        <button id="student-profile-button-4" class="back-btn" type="button" (click)="goToDashboard()" >← Back to dashboard</button>
+        <div id="student-profile-div-5" class="page-header">
+            <div id="student-profile-div-6" class="avatar">{{ initials }}</div>
+            <div id="student-profile-div-7" class="header-text">
+                <h2 id="student-profile-h2-8">{{ profile.fullName }}</h2>
+                <span id="student-profile-span-9" class="email">{{ profile.email }}</span>
             </div>
             <button id="delete-profile-btn" class="btn-danger" style="align-items:end"
                     type="button"
@@ -18,42 +18,42 @@
             >Delete Profile</button>
         </div>
 
-        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+        <form id="student-profile-form-11" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
 
-            <div class="card">
-                <p class="card-label">Basic info</p>
+            <div id="student-profile-div-12" class="card">
+                <p id="student-profile-p-13" class="card-label">Basic info</p>
 
-                <div class="field">
-                    <label for="headline">Headline <span class="req">*</span></label>
+                <div id="student-profile-div-14" class="field">
+                    <label id="student-profile-label-15" for="headline">Headline <span id="student-profile-span-16" class="req">*</span></label>
                     <input id="headline" type="text" formControlName="headline"
                            placeholder="e.g. CS final year student, VIT Chennai" />
-                    <span class="err"
+                    <span id="student-profile-span-18" class="err"
                           *ngIf="form.get('headline')?.invalid && form.get('headline')?.touched">
             Required · max 255 characters
           </span>
                 </div>
 
-                <div class="field">
-                    <label for="currentRole">Current role <span class="req">*</span></label>
+                <div id="student-profile-div-19" class="field">
+                    <label id="student-profile-label-20" for="currentRole">Current role <span id="student-profile-span-21" class="req">*</span></label>
                     <input id="currentRole" type="text" formControlName="currentRole"
                            placeholder="e.g. Fresher, Junior developer" />
-                    <span class="err"
+                    <span id="student-profile-span-23" class="err"
                           *ngIf="form.get('currentRole')?.invalid && form.get('currentRole')?.touched">
             Required · max 100 characters
           </span>
                 </div>
             </div>
 
-            <div class="card">
-                <p class="card-label">Interests</p>
-                <div class="tags-box" (click)="tagEl.focus()">
-          <span class="tag" *ngFor="let tag of interestTags">
+            <div id="student-profile-div-24" class="card">
+                <p id="student-profile-p-25" class="card-label">Interests</p>
+                <div id="student-profile-div-26" class="tags-box" (click)="tagEl.focus()">
+          <span [id]="'student-profile-span-27-' + tagIndex1" class="tag" *ngFor="let tag of interestTags; let tagIndex1 = index">
             {{ tag }}
-              <button type="button" class="tag-x"
+              <button [id]="'student-profile-button-28-' + tagIndex1" type="button" class="tag-x"
                       (click)="removeTag(tag)"
                       [attr.aria-label]="'Remove ' + tag">×</button>
           </span>
-                    <input #tagEl
+                    <input id="student-profile-input-29" #tagEl
                            class="tag-input"
                            [(ngModel)]="tagInputValue"
                            [ngModelOptions]="{standalone: true}"
@@ -61,28 +61,28 @@
                            (keydown)="onTagKeydown($event)"
                            (blur)="commitTag()" />
                 </div>
-                <p class="hint">Enter or comma to add · Backspace removes last</p>
+                <p id="student-profile-p-30" class="hint">Enter or comma to add · Backspace removes last</p>
             </div>
 
-            <div class="card">
-                <p class="card-label">Learning goals</p>
-                <div class="field" style="margin-bottom:0">
-                    <label for="goals">What do you want to achieve?</label>
+            <div id="student-profile-div-31" class="card">
+                <p id="student-profile-p-32" class="card-label">Learning goals</p>
+                <div id="student-profile-div-33" class="field" style="margin-bottom:0">
+                    <label id="student-profile-label-34" for="goals">What do you want to achieve?</label>
                     <textarea id="goals" formControlName="goals" rows="5"
                               placeholder="The more specific, the better — mentors read this before accepting."></textarea>
-                    <div class="goals-footer">
-                        <span class="err" *ngIf="form.get('goals')?.hasError('maxlength')">Max 500 characters</span>
-                        <span class="char" [class.over]="goalsLength > 500">{{ goalsLength }} / 500</span>
+                    <div id="student-profile-div-36" class="goals-footer">
+                        <span id="student-profile-span-37" class="err" *ngIf="form.get('goals')?.hasError('maxlength')">Max 500 characters</span>
+                        <span id="student-profile-span-38" class="char" [class.over]="goalsLength > 500">{{ goalsLength }} / 500</span>
                     </div>
                 </div>
             </div>
 
 
-            <div class="banner success" *ngIf="saveSuccess">✓ Profile saved successfully</div>
-            <div class="banner error"   *ngIf="errorMsg">{{ errorMsg }}</div>
+            <div id="student-profile-div-39" class="banner success" *ngIf="saveSuccess">✓ Profile saved successfully</div>
+            <div id="student-profile-div-40" class="banner error"   *ngIf="errorMsg">{{ errorMsg }}</div>
 
-            <div class="action-row">
-                <button type="button" class="btn-ghost" (click)="goToDashboard()">Cancel</button>
+            <div id="student-profile-div-41" class="action-row">
+                <button id="student-profile-button-42" type="button" class="btn-ghost" (click)="goToDashboard()">Cancel</button>
                 <button id="save-profile-btn" type="submit" class="btn-primary" [disabled]="saving">
                     {{ saving ? 'Saving…' : 'Save profile' }}
                 </button>
