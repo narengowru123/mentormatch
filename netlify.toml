@@ -1,6 +1,7 @@
 [build]
-command = "ng build"
-publish = "dist/mentormatch"
+base = "frontend"
+command = "npm install && npm run build"
+publish = "dist/mentormatch/browser"
 
 [[redirects]]
 from = "/*"
